@@ -1,10 +1,11 @@
 const express = require('express'); // imports express
 const router = express.Router(); // creates router
 
-// @route  GET api/users
-// @desc   Test route
+// @route  POST api/users
+// @desc   Register user
 // @access Public
-router.get('/', (req, res, next) => {
+router.post('/', (req, res, next) => {
+    console.log(req,body)
     res.send('user route');
 })
 
