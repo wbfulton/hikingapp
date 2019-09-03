@@ -11,7 +11,8 @@ const User = require('../../models/User'); // mongoose User model
 // @route  POST api/users
 // @desc   Register user
 // @access Public
-router.post('/', [ // checks required fields
+router.post('/', 
+[ // checks required fields
     check('name', 'Name is required')
         .not()
         .isEmpty(),
@@ -26,7 +27,9 @@ async (req, res, next) => {
     // sends errors if they exist
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res
+            .status(400)
+            .json({ errors: errors.array() });
     }
 
     const { name, email, password} = req.body; // pull variables out
@@ -36,7 +39,9 @@ async (req, res, next) => {
         let user = await User.findOne({ email });
 
         if(user) {
-            return res.status(400).json({ errors: [{ msg: 'User already exists' }] });
+            return res
+                .status(400)
+                .json({ errors: [{ msg: 'User already exists' }] });
         }
 
         // Get users gravatar
