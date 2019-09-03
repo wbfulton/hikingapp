@@ -11,6 +11,11 @@ app.get('/', (req, res, next) => {
     res.send('API Running');
 })
 
+// Define Routes
+app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/posts', require('./routes/api/posts'));
+app.use('/api/profile', require('./routes/api/profile'));
+app.use('/api/users', require('./routes/api/users'));
 
 // Port will listen on environment variable first, or 5000
 const PORT = process.env.PORT || 5000;

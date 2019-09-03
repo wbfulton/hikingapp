@@ -17,4 +17,4 @@ const connectDB = async () => {
     }
 }
 
-module.exports = connectDB;
+module.exports = connectDB; // exports method for use in routing
