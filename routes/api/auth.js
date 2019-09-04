@@ -11,7 +11,7 @@ const User = require('../../models/User'); // imports User model
 // @route  GET api/auth
 // @desc   Gets authenticated user information
 // @access Public
-router.get('/', auth, async (req, res, next) => {
+router.get('/', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
         res.json(user);
@@ -22,14 +22,14 @@ router.get('/', auth, async (req, res, next) => {
 })
 
 // @route  POST api/auth
-// @desc   Authenticate user and get token
+// @desc   Authenticate user and get token (login)
 // @access Public
 router.post('/', 
 [ // checks required fields
     check('email', 'Please include a valid email').isEmail(),
     check('password', 'Password is required').exists()
 ], // handles routing and database validation
-async (req, res, next) => {
+async (req, res) => {
 
     // checks and sends req.body data errors
     const errors = validationResult(req);

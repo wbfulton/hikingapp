@@ -9,7 +9,7 @@ const { check, validationResult } = require('express-validator'); // for validat
 const User = require('../../models/User'); // mongoose User model
 
 // @route  POST api/users
-// @desc   Register user
+// @desc   Register user (register)
 // @access Public
 router.post('/', 
 [ // checks required fields
@@ -22,7 +22,7 @@ router.post('/',
         'Please enter a password with more than 6 characters')
         .isLength({ min: 6 })
 ], // handles routing and database validation
-async (req, res, next) => {
+async (req, res) => {
 
     // sends errors if they exist
     const errors = validationResult(req);
@@ -32,7 +32,7 @@ async (req, res, next) => {
             .json({ errors: errors.array() });
     }
 
-    const { name, email, password} = req.body; // pull variables out
+    const { name, email, password } = req.body; // pull variables out
 
     try {
         // Sees if user exists
