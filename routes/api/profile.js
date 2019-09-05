@@ -1,7 +1,9 @@
 const express = require('express'); // imports express
 const router = express.Router(); // creates router
-const auth = require('../../middleware/auth'); // imports middlware
-const { check, validationResult } = require('express-validator'); // for validation
+
+// Import Validation and Authentication
+const auth = require('../../middleware/auth');
+const { check, validationResult } = require('express-validator'); 
 
 // Imported Models
 const Profile = require('../../models/Profile');
@@ -59,7 +61,7 @@ router.get('/user/:user_id', async (req, res) => {
         console.error(err.message);
         // if the Id is not valid, there is no profile
         //  it is not a server error
-        if(err.kind == 'ObjectId') {
+        if(err.kind === 'ObjectId') {
             return res.status(400).json({ msg: 'Profile not found' });
         }
         res.status(500).send('Server Error');
@@ -70,14 +72,17 @@ router.get('/user/:user_id', async (req, res) => {
 // @desc   Create or Update user profile
 // @access Private
 router.post('/', 
+// verification middleware
 [ 
     auth, 
-    check('type', 'Type is required')
-        .not()
-        .isEmpty(),
-    check('skills', 'Skills is required')
-        .not()
-        .isEmpty()
+    [
+        check('type', 'Type is required')
+            .not()
+            .isEmpty(),
+        check('skills', 'Skills is required')
+            .not()
+            .isEmpty()
+    ]
 ], 
 async (req, res) => {
     // returns errors if type or skills are empty

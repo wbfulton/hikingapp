@@ -1,10 +1,16 @@
 const express = require('express'); // imports express
 const router = express.Router(); // creates router
-const gravatar = require('gravatar'); // imports gravatar
+
+// Import password encryption
 const bcrypt = require('bcryptjs'); // imports bcryptjs
-const jwt = require('jsonwebtoken'); // imports jwt
-const config = require('config'); // imports config
+
+// Import Gravatar for profile
+const gravatar = require('gravatar'); // imports gravatar
+
+// Import Validation and Authentication
 const { check, validationResult } = require('express-validator'); // for validation
+const jwt = require('jsonwebtoken'); // imports jwt
+const config = require('config'); // imports config file
 
 const User = require('../../models/User'); // mongoose User model
 

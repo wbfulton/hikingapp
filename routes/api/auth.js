@@ -1,12 +1,17 @@
 const express = require('express'); // imports express
 const router = express.Router(); // creates router
-const auth = require('../../middleware/auth'); // imports custom auth method
-const jwt = require('jsonwebtoken'); // imports jwt
-const config = require('config'); // imports config
-const bcrypt = require('bcryptjs'); // imports bcryptjs
-const { check, validationResult } = require('express-validator'); // for validation
 
-const User = require('../../models/User'); // imports User model
+// Import password encryption
+const bcrypt = require('bcryptjs'); // imports bcryptjs
+
+// Import Validation and Authentication
+const auth = require('../../middleware/auth'); // imports custom auth method
+const { check, validationResult } = require('express-validator'); // for validation
+const jwt = require('jsonwebtoken'); // imports jwt
+const config = require('config'); // imports config file
+
+// Import Model
+const User = require('../../models/User');
 
 // @route  GET api/auth
 // @desc   Gets authenticated user information
