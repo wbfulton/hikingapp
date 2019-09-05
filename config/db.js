@@ -2,12 +2,15 @@ const mongoose = require('mongoose'); // imports mongoose
 const config = require('config'); // imports config package
 const db = config.get('mongoURI'); // gets mongoDB URI to connect
 
+
 // creates async method to connect to mongoose
+// we pass in options to avoid deprecated methods
 const connectDB = async () => {
     try {
         await mongoose.connect(db, { 
             useNewUrlParser: true,
-            useCreateIndex: true
+            useCreateIndex: true,
+            useFindAndModify : false
         });
 
         console.log('MongoDb Connected...')

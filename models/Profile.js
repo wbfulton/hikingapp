@@ -28,6 +28,10 @@ const ProfileSchema = new mongoose.Schema({
     resort: {
         type: String
     },
+    pass: {
+        type: String,
+        required: true
+    },
     bio: {
         type: String
     },
