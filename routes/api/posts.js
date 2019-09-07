@@ -7,7 +7,6 @@ const auth = require('../../middleware/auth');
 
 // Import Models
 const User = require('../../models/User');
-const Profile = require('../../models/Profile');
 const Post = require('../../models/Post');
 
 // @route  GET api/posts
@@ -41,6 +40,20 @@ router.get('/:id', auth, async (req, res) => {
     }
 });
 
+// @route  GET api/posts/me
+// @desc   Get posts made by a user
+// @access Private
+router.get('/dashboard/me', auth, async (req, res) => {
+    try {
+        const posts = await Post.find({user: req.user.id}).sort({ date: -1 });
+
+        res.json(posts);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 
 // @route  POST api/posts
 // @desc   Create a post
@@ -59,7 +72,7 @@ async (req, res) => {
     // returns errors if text is empty
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
-        return res.status(400).json( { erros: errors.array() });
+        return res.status(400).json( { errors: errors.array() });
     }
 
     try {
