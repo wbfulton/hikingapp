@@ -1,26 +1,57 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const PostSchema = new Schema({
+const DriveSchema = new Schema({
     user: {
-        type: Schema.Types.ObjectId,
+        type : Schema.Types.ObjectId,
         ref: 'user'
     },
-    text: {
-        type: String,
+    leavingDate: {
+        type: Date,
+        required: true,
+    },
+    resort: {
+        type : String,
         required: true
     },
     name: {
-        type: String
+        type: String,
     },
     avatar: {
         type: String
     },
-    likes: [
+    seats: {
+        type: Number,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    group : [
         {
             user: {
                 type: Schema.Types.ObjectId,
                 ref: 'user'
+            },
+            name : {
+                type: String
+            },
+            avatar : {
+                type: String
+            },
+            grade : {
+                type: String
+            },
+            type : {
+                type: String
+            },
+            skills : {
+                type: [String]
+            },
+            date: {
+                type: Date,
+                default: Date.now
             }
         }
     ],
@@ -46,10 +77,10 @@ const PostSchema = new Schema({
             }
         }
     ],
-    date: {
+    date : {
         type: Date,
         default: Date.now
     }
 });
 
-module.exports = Post = mongoose.model('post', PostSchema);
+module.exports = drive = mongoose.model('drive', DriveSchema);

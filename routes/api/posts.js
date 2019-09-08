@@ -15,7 +15,7 @@ const Post = require('../../models/Post');
 router.get('/', auth, async (req, res) => {
     try {
         // gets all dates by most recent
-        const posts = await Post.find().sort({ date: -1 });
+        const posts = await Post.find().sort({ date : -1 });
         res.json(posts);
     } catch (err) {
         console.error(err.message);
@@ -40,7 +40,7 @@ router.get('/:id', auth, async (req, res) => {
     }
 });
 
-// @route  GET api/posts/me
+// @route  GET api/posts/dashboard/me
 // @desc   Get posts made by a user
 // @access Private
 router.get('/dashboard/me', auth, async (req, res) => {
