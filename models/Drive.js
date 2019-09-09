@@ -39,10 +39,15 @@ const DriveSchema = new Schema({
                 ref: 'user'
             },
             name : {
-                type: String
+                type: String,
+                required: true
             },
             avatar : {
                 type: String
+            },
+            messenger: {
+                type: String,
+                required: true
             },
             grade : {
                 type: String

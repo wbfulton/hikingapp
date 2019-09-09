@@ -253,6 +253,7 @@ router.put('/join/:id', auth, async (req, res) => {
         const joinFields = {};
         joinFields.user = user.id;
         joinFields.name = user.name;
+        joinFields.messenger = user.messenger;
         joinFields.avatar = user.avatar;
         if(profile.grade) joinFields.grade = profile.grade;
         if(profile.type) joinFields.type = profile.type;

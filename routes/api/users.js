@@ -22,6 +22,9 @@ router.post('/',
     check('name', 'Name is required')
         .not()
         .isEmpty(),
+    check('messenger', 'Messenger link is required')
+        .not()
+        .isEmpty(),
     check('email', 'Please include a valid email')
         .isEmail(),
     check('password',
@@ -38,7 +41,7 @@ async (req, res) => {
             .json({ errors: errors.array() });
     }
 
-    const { name, email, password } = req.body; // pull variables out
+    const { name, email, messenger, password } = req.body; // pull variables out
 
     try {
         // Sees if user exists
@@ -61,6 +64,7 @@ async (req, res) => {
         user = new User({
             name,
             email,
+            messenger,
             avatar,
             password
         });

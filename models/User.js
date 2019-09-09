@@ -11,6 +11,10 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    messenger: {
+        type: String,
+        required: true
+    },
     password: {
         type: String,
         required: true,
