@@ -196,7 +196,7 @@ async (req, res) => {
     // returns errors if text is empty
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
-        return res.status(400).json( { erros: errors.array() });
+        return res.status(400).json( { errors: errors.array() });
     }
 
     try {

@@ -306,4 +306,86 @@ router.put('/leave/:id', auth, async (req, res) => {
     }
 });
 
+// @route  POST api/drives/comment/:id
+// @desc   Comment on a post
+// @access Private
+router.post('/comment/:id', 
+// verfication middleware
+[ 
+    auth, 
+    [
+        check('text', 'Text is required')
+            .not()
+            .isEmpty()
+    ]
+], 
+async (req, res) => {
+    // returns errors if text is empty
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        return res.status(400).json( { errors: errors.array() });
+    }
+
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+        const drive = await Drive.findById(req.params.id);
+
+        const newComment = new Post({
+            text: req.body.text,
+            name: user.name,
+            avatar: user.avatar,
+            user: req.user.id
+        });
+        
+        drive.comments.unshift(newComment);
+
+        // saves post to database
+        await drive.save();
+
+        res.json(drive.comments);
+    } catch (err) {
+        console.error(err.message);
+        if(err.kind === 'ObjectId') return res.status(404).json({ msg: 'Drive not found'});
+        res.status(500).send('Server Error');
+    }
+});
+
+// @route  DELETE api/drives/comment/:id/:comment_id
+// @desc   Delete comment on a post
+// @access Private
+router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
+    try {
+        const drive = await Drive.findById(req.params.id);
+        
+        // Pull our comment
+        const comment = drive.comments.find(comment => comment.id === req.params.comment_id);
+
+        // Make sure comment exists
+        if(!comment) {
+            return res.status(404).json({ msg: 'Comment does not exist' });
+        }
+
+        // Check user
+        if(comment.user.toString() !== req.user.id){
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        // Get remove index
+        const removeIndex = drive.comments
+            .map(comment => comment.user.toString())
+            .indexOf(req.user.id);
+        
+        drive.comments.splice(removeIndex, 1);
+
+        // saves post to database
+        await drive.save();
+
+        res.json(drive.comments);
+    } catch (err) {
+        console.error(err.message);
+        if(err.kind === 'ObjectId') return res.status(404).json({ msg: 'Drive not found'});
+        res.status(500).send('Server Error');
+    }
+});
+
 module.exports = router;
