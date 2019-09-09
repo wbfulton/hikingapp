@@ -10,6 +10,10 @@ const DriveSchema = new Schema({
         type: Date,
         required: true,
     },
+    leavingTime: {
+        type: String,
+        required: true,
+    },
     resort: {
         type : String,
         required: true

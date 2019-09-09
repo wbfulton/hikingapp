@@ -157,6 +157,7 @@ async (req, res) => {
 router.delete('/', auth, async (req, res) => {
     try {
         // @todo - remove users posts
+        // @todo - remove users drives
 
         // Remove profile with id in token
         await Profile.findOneAndRemove({ user: req.user.id });

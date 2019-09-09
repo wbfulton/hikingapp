@@ -67,7 +67,7 @@ router.post('/',
         check('leavingDate', 'Date is required')
             .not()
             .isEmpty(),
-        check('leavingTime', 'Time is required')
+        check('leavingDate', 'Date is required')
             .not()
             .isEmpty(),
         check('resort', 'Resort is required')
@@ -97,6 +97,7 @@ async (req, res) => {
             name : user.name,
             avatar : user.avatar,
             leavingDate : req.body.leavingDate,
+            leavingTime : req.body.leavingTime,
             resort : req.body.resort,
             seats : req.body.seats,
             description : req.body.description,
@@ -116,9 +117,193 @@ async (req, res) => {
         res.json(drive);
     } catch (err) {
         console.error(err.message);
+        // if an invlid objectId is sent
+        if(err.kind === 'ObjectId') {
+            return res.status(400).json({ msg: 'Drive not found' });
+        }
         res.status(500).send('Server Error');
     }
+});
 
+// @route  PUT api/drives/:id
+// @desc   Update a drives info
+// @access Private
+router.put('/:id', 
+[ 
+    auth, 
+    [
+        check('leavingDate', 'Date is required')
+            .not()
+            .isEmpty(),
+        check('leavingDate', 'Date is required')
+            .not()
+            .isEmpty(),
+        check('resort', 'Resort is required')
+            .not()
+            .isEmpty(),
+        check('seats', 'Seats are required')
+            .not()
+            .isEmpty(),
+        check('description', 'Description is required')
+            .not()
+            .isEmpty(),
+    ]
+], 
+async (req, res) => {
+    // returns errors if any fields are empty
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+        let drive = await Drive.findById(req.params.id);
+
+        // Check if drive exists
+        if(!drive) return res.status(404).json({ msg: 'Drive not found' });
+
+        // Checks if drive belongs to user
+        if(drive.user.toString() !== req.user.id){
+            return res.status(401).json({ msg: 'User not Authorized' });
+        }
+
+        // sets all drive fields to variables
+        const {
+            leavingDate,
+            leavingTime,
+            resort,
+            seats,
+            description,
+        } = req.body;
+
+        // all fields are required
+        let driveFields = {};
+        driveFields.user = req.user.id;
+        driveFields.avatar = user.avatar;
+        driveFields.leavingDate = leavingDate;
+        driveFields.leavingTime = leavingTime;
+        driveFields.resort = resort;
+        driveFields.seats = seats;
+        driveFields.description = description;
+        
+        drive = await Drive.findOneAndUpdate(
+            { _id: req.params.id }, 
+            { $set: driveFields }, 
+            { new: true},
+            useFindAndModify = false);
+
+        return res.json(drive);
+    } catch (err) {
+        console.error(err.message);
+        // if an invalid objectId is sent
+        if(err.kind === 'ObjectId') {
+            return res.status(400).json({ msg: 'Drive not found' });
+        }
+        res.status(500).send('Server Error');
+    }
+});
+
+// @route  DELETE api/drives/:id
+// @desc   Deletes a drive
+// @access Private
+router.delete('/:id', auth, async (req, res) => {
+    try {
+        const drive = await Drive.findById(req.params.id);
+
+        // Check if drive exists
+        if(!drive) return res.status(404).json({ msg: 'Drive not found'});
+
+        // Check user
+        if(drive.user.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized'});
+        }
+
+        await drive.remove();
+
+        res.json({ msg: 'Drive removed'});
+    } catch (err) {
+        console.error(err.message);
+        // if an invlid objectId is sent
+        if(err.kind === 'ObjectId') {
+            return res.status(400).json({ msg: 'Drive not found' });
+        }
+    }
+});
+
+// @route  PUT api/drives/join/:id
+// @desc   Joins a drive
+// @access Private
+router.put('/join/:id', auth, async (req, res) => {
+    try {
+        const drive = await Drive.findById(req.params.id);
+        const user = await User.findById(req.user.id);
+        const profile = await Profile.findOne({ user: req.user.id });
+
+        // Check if drive exists
+        if(!drive) return res.status(404).json({ msg: 'Drive not found' });
+
+        // Check if user already joined drive
+        if(drive.group.filter(join => join.user.toString() === user.id).length > 0){
+            return res.status(400).json({ msg: 'Drive already joined' })
+        }
+
+        // Creating object to add to array
+        // Necessary in case user has not created a profile
+        const joinFields = {};
+        joinFields.user = user.id;
+        joinFields.name = user.name;
+        joinFields.avatar = user.avatar;
+        if(profile.grade) joinFields.grade = profile.grade;
+        if(profile.type) joinFields.type = profile.type;
+        if(profile.skills) joinFields.skills = profile.skills;
+
+        drive.group.unshift(joinFields);
+
+        await drive.save();
+
+        res.json(drive.group);  
+    } catch (err) {
+        console.error(err.message);
+        // if an invalid objectId is sent
+        if(err.kind === 'ObjectId') {
+            return res.status(400).json({ msg: 'Drive not found' });
+        }
+    }
+});
+
+// @route  PUT api/drives/join/:id
+// @desc   Leaves a drive
+// @access Private
+router.put('/leave/:id', auth, async (req, res) => {
+    try {
+        const drive = await Drive.findById(req.params.id);
+
+        // Check if drive exists
+        if(!drive) return res.status(404).json({ msg: 'Drive not found' });
+
+        // Check if user joined drive
+        if(drive.group.filter(join => join.user.toString() === req.user.id).length === 0){
+            return res.status(400).json({ msg: 'Drive not joined' })
+        }
+
+        // Get remove index
+        const removeIndex = drive.group
+            .map(join => join.user.toString())
+            .indexOf(req.user.id);
+
+        drive.group.splice(removeIndex, 1);
+
+        await drive.save();
+
+        res.json(drive.group);  
+    } catch (err) {
+        console.error(err.message);
+        // if an invalid objectId is sent
+        if(err.kind === 'ObjectId') {
+            return res.status(400).json({ msg: 'Drive not found' });
+        }
+    }
 });
 
 module.exports = router;
