@@ -260,6 +260,7 @@ router.put('/join/:id', auth, async (req, res) => {
         if(profile.skills) joinFields.skills = profile.skills;
 
         drive.group.unshift(joinFields);
+        drive.seats = drive.seats + 1;
 
         await drive.save();
 
@@ -294,6 +295,7 @@ router.put('/leave/:id', auth, async (req, res) => {
             .indexOf(req.user.id);
 
         drive.group.splice(removeIndex, 1);
+        drive.seats = drive.seats + 1;
 
         await drive.save();
 
