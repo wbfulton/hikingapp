@@ -11,7 +11,7 @@ export default function(state = initialState, action) {
         case SET_ALERT: // returns state array + payload
             return [...state, payload];
         case REMOVE_ALERT: // removes specified alert
-            return state.filter(alert => alert.id != payload);
+            return state.filter(alert => alert.id !== payload);
         default:
             return state;
     }

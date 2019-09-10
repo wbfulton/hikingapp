@@ -1,7 +1,10 @@
 import React, { Fragment, useState } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { setAlert } from '../../actions/alert';
+import PropTypes from 'prop-types';
 
-const Register = () => {
+const Register = ({ setAlert }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,36 +19,15 @@ const Register = () => {
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  // sends form data to database
+  // sends alert if passwords do not match
+  // sends success alert if user is created successfully
   const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
-      console.log('Passwords do not match');
+      setAlert('Passwords do not match', 'danger');
     } else {
-      console.log('SUCCESS');
-      /*
-      const newUser = {
-        name,
-        email,
-        messenger,
-        password
-      };
-
-      console.log(newUser);
-
-      try {
-        const config = {
-          header: {
-            'Content-Type': 'application/json'
-          }
-        };
-
-        // route can be /api/users/ because we implemented a proxy
-        const res = await axios.post('/api/users', newUser, config);
-        console.log(res.data);
-      } catch (err) {
-        console.error(err.response.data);
-      }
-      */
+      setAlert('Success', 'success');
     }
   };
 
@@ -125,4 +107,11 @@ const Register = () => {
   );
 };
 
-export default Register;
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired
+};
+
+export default connect(
+  null,
+  { setAlert }
+)(Register);
