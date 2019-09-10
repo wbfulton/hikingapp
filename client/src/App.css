@@ -245,12 +245,10 @@ img {
   color: #888;
 }
 
-.form input[type='date'],
-.form input[type='time'],
-.form input[type='number'],
 .form input[type='text'],
 .form input[type='email'],
 .form input[type='password'],
+.form input[type='date'],
 .form select,
 .form textarea {
   display: block;
@@ -336,7 +334,6 @@ button {
 .about {
   position: relative;
   background: url('./img/about.jpg') no-repeat center center/cover;
-  background-size: cover;
   height: 100vh;
 }
 

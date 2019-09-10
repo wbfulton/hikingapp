@@ -12,11 +12,11 @@ const App = () => (
       <Fragment>
         <Navbar />
         <Route exact path='/' component={Landing} />
+        <Route exact path="/about" component={About} />
         <section className="container" >
           <Switch>
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/about" component={About} />
           </Switch>
         </section>
       </Fragment>

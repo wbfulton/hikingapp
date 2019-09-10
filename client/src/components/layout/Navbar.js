@@ -6,7 +6,7 @@ const Navbar = () => {
         <nav className="navbar bg-dark">
         <h1>
             <Link to='/'>
-                <i className="fas fa-skiing" /> Husky Snow Club
+                <i className="fas fa-skiing"></i> Husky Snow Club
             </Link>
         </h1>
         <ul>
@@ -20,7 +20,7 @@ const Navbar = () => {
                 <Link to="/register">Register</Link>
             </li>
             <li>
-                <Link to="/login">Login</Link>
+                <Link to="/login">Sign In</Link>
             </li>
         </ul>
         </nav>
