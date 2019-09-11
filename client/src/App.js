@@ -6,6 +6,8 @@ import About from './components/layout/About';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Alert from './components/layout/Alert';
+import Dashboard from './components/dashboard/Dashboard';
+import PrivateRoute from './components/routing/PrivateRoute';
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -36,6 +38,7 @@ return (
           <Switch>
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
           </Switch>
         </section>
       </Fragment>
