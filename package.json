@@ -4,8 +4,8 @@
   "description": "SnowClub Web App",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
-    "server": "nodemon server",
+    "start": "node server.js",
+    "server": "nodemon server.js --ignore client",
     "client": "npm start --prefix client",
     "dev" : "concurrently \"npm run server \" \"npm run client \""
   },

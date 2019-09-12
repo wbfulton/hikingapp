@@ -2,7 +2,7 @@ const mongoose = require('mongoose'); // imports mongoose
 
 // create the Profile Schema contains:
 //      grade
-//      type is board or ski, 
+//      type is board or ski,
 //      skills
 //      resort is favorite resort
 //      bio
@@ -10,52 +10,51 @@ const mongoose = require('mongoose'); // imports mongoose
 //      social, media links
 //      date, date created
 const ProfileSchema = new mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
-    },
-    grade: {
-        type: String,
-    },
-    type: {
-        type: String,
-        required: true
-    },
-    skills: {
-        type: [String],
-        required: true
-    },
-    resort: {
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user'
+  },
+  grade: {
+    type: String
+  },
+  type: {
+    type: String,
+    required: true
+  },
+  skills: {
+    type: [String],
+    required: true
+  },
+  resort: {
+    type: String
+  },
+  pass: {
+    type: String
+  },
+  bio: {
+    type: String
+  },
+  driver: {
+    type: Boolean,
+    default: false
+  },
+  social: [
+    {
+      twitter: {
         type: String
-    },
-    pass: {
-        type: String,
-        required: true
-    },
-    bio: {
+      },
+      facebook: {
         type: String
-    },
-    driver: {
-        type: Boolean,
-        default: false
-    },
-    social: [
-        {
-            twitter: {
-                type: String
-            },
-            facebook: {
-                type: String
-            },
-            instagram: {
-                type: String
-            }
-        }
-    ],
-    date: {
-        type: Date,
-        default: Date.now
+      },
+      instagram: {
+        type: String
+      }
     }
+  ],
+  date: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);
