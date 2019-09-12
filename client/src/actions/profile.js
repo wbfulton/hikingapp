@@ -7,11 +7,11 @@ import { GET_PROFILE, PROFILE_ERROR } from './types';
 export const getCurrentProfile = () => async dispatch => {
   try {
     const res = await axios.get('/api/profile/me');
-
+    
     // If success, sends GET_PROFILE action with all profile data
     dispatch({
       type: GET_PROFILE,
-      profile: res.data
+      payload: res.data
     });
   } catch (err) {
     // If error, sends a PROFILE_ERROR action and msg with status code
@@ -39,7 +39,7 @@ export const createProfile = (
 
     dispatch({
       type: GET_PROFILE,
-      profile: res.data
+      payload: res.data
     });
 
     dispatch(setAlert(edit ? 'Profile Updated' : 'Profile Created', 'success'));
