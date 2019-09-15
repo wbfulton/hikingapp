@@ -44,10 +44,8 @@ export const createProfile = (
 
     dispatch(setAlert(edit ? 'Profile Updated' : 'Profile Created', 'success'));
 
-    // Redirect to dashboard after making profile
-    if (!edit) {
-      history.push('/dashboard');
-    }
+    // Redirect to dashboard after making or editing profile
+    history.push('/dashboard');
   } catch (err) {
     // Creates alerts for missing required fields
     const errors = err.response.data.errors;

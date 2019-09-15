@@ -11,7 +11,7 @@ const DashboardActions = () => {
         <i className="fas fa-car text-primary"></i> Join a Drive
       </Link>
       <Link to="/posts" className="btn btn-light">
-        <i className="fas fa-comment text-primary"></i> Add Post
+        <i className="fas fa-comment text-primary"></i> Make a Post
       </Link>
     </div>
   );

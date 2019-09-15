@@ -56,6 +56,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   // displays navbar is page is not loading
   return (
+    <body>
     <nav className="navbar bg-dark">
       <h1>
         <Link to="/">
@@ -64,6 +65,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       </h1>
       { !loading && (<Fragment>{ isAuthenticated ? authLinks: guestLinks }</Fragment>) }
     </nav>
+    </body>
   );
 };
 
