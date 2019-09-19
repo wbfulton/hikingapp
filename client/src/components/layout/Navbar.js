@@ -22,15 +22,15 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       </li>
       <li>
         |
-        <Link to='/dashboard'>
-          <i className='fas fa-user' />{' '}
-          <span className='hide-sm'>Dashboard</span>
+        <Link to="/dashboard">
+          <i className="fas fa-user" />{' '}
+          <span className="hide-sm">Dashboard</span>
         </Link>
       </li>
       <li>
-        <a onClick={logout} href='#!'>
-          <i className='fas fa-sign-out-alt' />{' '}
-          <span className='hide-sm'>Logout</span>
+        <a onClick={logout} href="#!">
+          <i className="fas fa-sign-out-alt" />{' '}
+          <span className="hide-sm">Logout</span>
         </a>
       </li>
     </ul>
@@ -56,16 +56,16 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   // displays navbar is page is not loading
   return (
-    <body>
     <nav className="navbar bg-dark">
       <h1>
         <Link to="/">
           <i className="fas fa-skiing"></i> Husky Snow Club
         </Link>
       </h1>
-      { !loading && (<Fragment>{ isAuthenticated ? authLinks: guestLinks }</Fragment>) }
+      {!loading && (
+        <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
+      )}
     </nav>
-    </body>
   );
 };
 

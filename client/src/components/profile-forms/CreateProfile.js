@@ -73,7 +73,7 @@ const CreateProfile = ({ createProfile, history }) => {
             <option value="0">* Select Type</option>
             <option value="Skier">Skier</option>
             <option value="Snowboarder">Snowboarder</option>
-            <option value="Both">Both</option>
+            <option value="Skier and Snowboarder">Skier and Snowboarder</option>
           </select>
           <small className="form-text">
             * Let us know how you shred the mountain

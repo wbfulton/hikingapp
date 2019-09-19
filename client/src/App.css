@@ -374,9 +374,7 @@ button {
   display: grid;
   grid-template-areas:
     'top top'
-    'about about'
-    'exp edu'
-    'github github';
+    'about about';
   grid-gap: 1rem;
 }
 
@@ -386,7 +384,6 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
 }
 
 .profile-top img {

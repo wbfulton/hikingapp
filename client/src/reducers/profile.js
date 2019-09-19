@@ -1,4 +1,9 @@
-import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE } from '../actions/types';
+import {
+  GET_PROFILE,
+  GET_PROFILES,
+  PROFILE_ERROR,
+  CLEAR_PROFILE
+} from '../actions/types';
 
 // profile for a single users profile,
 // profiles for listing page
@@ -14,12 +19,18 @@ const initialState = {
 
 export default function(state = initialState, action) {
   const { type, payload } = action;
-  
+
   switch (type) {
     case GET_PROFILE:
       return {
         ...state,
         profile: payload,
+        loading: false
+      };
+    case GET_PROFILES:
+      return {
+        ...state,
+        profiles: payload,
         loading: false
       };
     case PROFILE_ERROR:
@@ -35,7 +46,7 @@ export default function(state = initialState, action) {
         drives: [],
         posts: [],
         loading: false
-      }
+      };
     default:
       return state;
   }
