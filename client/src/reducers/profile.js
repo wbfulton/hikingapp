@@ -17,6 +17,7 @@ const initialState = {
   error: {}
 };
 
+// Updates State According to the Action passed in
 export default function(state = initialState, action) {
   const { type, payload } = action;
 

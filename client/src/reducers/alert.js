@@ -2,8 +2,7 @@
 import { SET_ALERT, REMOVE_ALERT } from '../actions/types';
 const initialState = [];
 
-// sets state of alert according to action called
-// payload can be anything we send in
+// Updates State According to the Action passed in
 export default function(state = initialState, action) {
   const { type, payload } = action;
 
