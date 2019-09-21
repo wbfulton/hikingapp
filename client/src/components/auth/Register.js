@@ -104,7 +104,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             required
           />
         </div>
-        <input type="submit" className="btn btn-primary" value="Register" />
+        <input type="submit" className="btn btn-primary" value="Sign Up" />
       </form>
       <p className="my-1">
         Already have an account? <Link to="/login">Sign In</Link>
