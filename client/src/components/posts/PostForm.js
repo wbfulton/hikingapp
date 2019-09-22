@@ -16,7 +16,7 @@ const PostForm = ({ addPost }) => {
           type="button"
           onClick={() => togglePostForm(!displayPostForm)}
         >
-          Say Something...
+          <h3>Say Something...</h3>
         </button>
       </div>
 
