@@ -18,9 +18,6 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <Link to="/profiles">Members</Link>
       </li>
       <li>
-        <Link to="/officers">Officers</Link>
-      </li>
-      <li>
         |
         <Link to="/dashboard">
           <i className="fas fa-user" />{' '}
@@ -41,9 +38,6 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <ul>
       <li>
         <Link to="/about">About</Link>
-      </li>
-      <li>
-        <Link to="/officers">Officers</Link>
       </li>
       <li>
         <Link to="/register">Sign Up</Link>

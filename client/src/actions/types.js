@@ -1,4 +1,4 @@
-// Global variable types for action and reducer files
+// Global variable types for actions
 export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
@@ -18,3 +18,4 @@ export const POST_ERROR = 'POST_ERROR';
 export const UPDATE_LIKES = 'UPDATE_LIKES';
 export const DELETE_POST = 'DELETE_POST';
 export const ADD_POST = 'ADD_POST';
+export const MY_POSTS = 'MY_POSTS';

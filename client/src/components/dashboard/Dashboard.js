@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import DashboardActions from './DashboardActions';
+import Drives from './Drives';
+import Posts from './Posts';
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 
 // useEffect will getCurrentProfile every time Dashboard comp is used
@@ -28,6 +30,8 @@ const Dashboard = ({
       {profile !== null ? (
         <Fragment>
           <DashboardActions />
+
+          <Posts />
 
           <div className="my-2">
             <button className='btn btn-danger' onClick={() => deleteAccount()}>

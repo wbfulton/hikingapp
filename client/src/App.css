@@ -170,6 +170,10 @@ img {
   color: #fff;
 }
 
+.btn-bg {
+  width: 100%;  
+}
+
 .btn-light,
 .bg-light,
 .badge-light,
