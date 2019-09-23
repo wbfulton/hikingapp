@@ -30,10 +30,10 @@ const Dashboard = ({
       {profile !== null ? (
         <Fragment>
           <DashboardActions />
-
+          
           <Posts />
 
-          <div className="my-2">
+          <div className="my-2 p-1">
             <button className='btn btn-danger' onClick={() => deleteAccount()}>
               <i className="fas fa-user-minus"></i> Delete My Account
             </button>

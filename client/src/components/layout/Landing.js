@@ -12,7 +12,7 @@ const Landing = ({ isAuthenticated }) => {
     <section className="landing">
       <div className="dark-overlay">
         <div className="landing-inner">
-          <h1 className="x-large">Greek Huskies</h1>
+          <h1 className="x-large">Husky Snow Club</h1>
           <p className="lead">
             Unlimited rides to the mountain. Far out trips across North America. Stay Greek.
           </p>

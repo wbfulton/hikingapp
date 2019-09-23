@@ -196,6 +196,8 @@ img {
 .badge-danger,
 .alert-danger {
   background: var(--danger-color);
+  position: absolute;
+  right: 50px;
   color: #fff;
 }
 

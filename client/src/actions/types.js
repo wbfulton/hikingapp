@@ -23,3 +23,5 @@ export const MY_POSTS = 'MY_POSTS';
 export const MY_DRIVES = 'MY_DRIVES';
 export const ADD_COMMENT = "ADD_COMMENT";
 export const REMOVE_COMMENT = "REMOVE_COMMENT";
+export const GET_DRIVES = "GET_DRIVES";
+export const DRIVE_ERROR = "DRIVE_ERROR";

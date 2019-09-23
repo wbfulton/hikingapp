@@ -15,18 +15,22 @@ const Posts = ({ getMyPosts, post: { posts, loading } }) => {
     <Spinner />
   ) : (
     <Fragment>
-      <p className="large lead text-primary p-1">
-        My Posts
-      </p>
-      <div className="posts">
-        {posts.map(post => (
-          <PostItem key={post._id} post={post} />
-        ))}
-      </div>
+      <p className="large lead text-primary p-1">My Posts</p>
+      {posts.length > 0 ? (
+        <Fragment>
+          <div className="posts">
+            {posts.map(post => (
+              <PostItem key={post._id} post={post} />
+            ))}
+          </div>
+        </Fragment>
+      ) : (
+        <p className="lead text-center p-1">
+          You have not posted yet, join the conversation!
+        </p>
+      )}
 
-      <p className="large lead text-primary p-1">
-        My Drives
-      </p>
+      <p className="large lead text-primary p-1">My Drives</p>
       <div className="posts">
         {posts.map(post => (
           <PostItem key={post._id} post={post} />
