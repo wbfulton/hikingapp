@@ -49,7 +49,6 @@ const App = () => {
               <PrivateRoute exact path="/profiles" component={Profiles} />
               <PrivateRoute exact path="/profile/:id" component={Profile} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              <PrivateRoute exact path="/drives" component={Drives} />
               <PrivateRoute
                 exact
                 path="/create-profile"
@@ -62,6 +61,12 @@ const App = () => {
               />
               <PrivateRoute exact path="/posts" component={Posts} />
               <PrivateRoute exact path="/posts/:id" component={Post} />
+              <PrivateRoute exact path="/drives" component={Drives} />
+              <PrivateRoute
+                exact
+                path="/drives/:id"
+                component={Drives}
+              />
             </Switch>
           </section>
           <Footer />

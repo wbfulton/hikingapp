@@ -1,4 +1,9 @@
-import { GET_DRIVES, DRIVE_ERROR } from '../actions/types';
+import {
+  GET_DRIVES,
+  DRIVE_ERROR,
+  DELETE_DRIVE,
+  ADD_DRIVE
+} from '../actions/types';
 
 const initialState = {
   drives: [],
@@ -18,10 +23,23 @@ export default function(state = initialState, action) {
         drives: payload,
         loading: false
       };
+    // Newly created post is shown first until refresh
+    case ADD_DRIVE:
+      return {
+        ...state,
+        drives: [payload, ...state.drives],
+        loading: false
+      };
     case DRIVE_ERROR:
       return {
         ...state,
         error: payload,
+        loading: false
+      };
+    case DELETE_DRIVE:
+      return {
+        ...state,
+        drives: state.drives.filter(drive => drive._id !== payload),
         loading: false
       };
     default:

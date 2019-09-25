@@ -191,10 +191,14 @@ img {
   color: #fff;
 }
 
-.btn-danger,
 .bg-danger,
 .badge-danger,
 .alert-danger {
+  background: var(--danger-color);
+  color: #fff;
+}
+
+.btn-danger {
   background: var(--danger-color);
   position: absolute;
   right: 50px;
@@ -260,6 +264,8 @@ img {
 
 .form input[type='text'],
 .form input[type='email'],
+.form input[type='time'],
+.form input[type='number'],
 .form input[type='password'],
 .form input[type='date'],
 .form select,

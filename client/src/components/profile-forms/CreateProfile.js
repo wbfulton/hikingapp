@@ -35,7 +35,6 @@ const CreateProfile = ({ createProfile, history }) => {
   } = formData;
 
   const onChange = e =>
-    // Ternary operator for Driver boolean
     setFormData({
       ...formData,
       [e.target.name]: e.target.value

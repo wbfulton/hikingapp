@@ -15,7 +15,7 @@ const ProfileItem = ({
       <img src={avatar} alt="" className="round-img" />
       <div>
         <h2>{name}</h2>
-        <p className="lead">{driver && <i className="fas fa-check"> Driver</i>}</p>
+        <p className="lead">{driver && <i className="fas fa-car"> Driver</i>}</p>
         <p>{type}</p>
         <p className="my-1">{grade !== '0' && <span>{grade}</span>}</p>
         

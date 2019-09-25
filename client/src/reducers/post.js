@@ -5,7 +5,6 @@ import {
   UPDATE_LIKES,
   DELETE_POST,
   ADD_POST,
-  MY_POSTS,
   ADD_COMMENT,
   REMOVE_COMMENT
 } from '../actions/types';
@@ -23,7 +22,6 @@ export default function(state = initialState, action) {
 
   switch (type) {
     case GET_POSTS:
-    case MY_POSTS:
       return {
         ...state,
         posts: payload,

@@ -28,7 +28,15 @@ router.post(
       .isEmail(),
     check('messenger', 'Messenger link is required')
       .not()
-      .isEmpty(),
+      .isEmpty()
+      .custom(messenger => {
+        // Checks messenger link
+        if(!messenger.contains('m.me/')){
+          throw new Error('Invalid Messenger Link');
+        }
+
+        return true;
+      }),
     check(
       'password',
       'Please enter a password with more than 6 characters'

@@ -7,7 +7,6 @@ import {
   UPDATE_LIKES,
   DELETE_POST,
   ADD_POST,
-  MY_POSTS,
   ADD_COMMENT,
   REMOVE_COMMENT
 } from './types';
@@ -54,7 +53,7 @@ export const getMyPosts = () => async dispatch => {
     const res = await axios.get('/api/posts/dashboard/me');
 
     dispatch({
-      type: MY_POSTS,
+      type: GET_POSTS,
       payload: res.data
     });
   } catch (err) {

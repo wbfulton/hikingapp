@@ -29,13 +29,6 @@ const Posts = ({ getMyPosts, post: { posts, loading } }) => {
           You have not posted yet, join the conversation!
         </p>
       )}
-
-      <p className="large lead text-primary p-1">My Drives</p>
-      <div className="posts">
-        {posts.map(post => (
-          <PostItem key={post._id} post={post} />
-        ))}
-      </div>
     </Fragment>
   );
 };
