@@ -6,6 +6,7 @@ const About = () => {
     <section className="about">
       <div className="dark-overlay">
         <div className="about-inner pt">
+          {/* Section 1 */}
           <div className="m">
             <h3 className="text-primary">Who are We?</h3>
             <p className="text-center">
@@ -14,6 +15,7 @@ const About = () => {
             </p>
             <div className="line"></div>
           </div>
+          {/* Section 2 */}
           <div>
             <h3 className="text-primary">What do We Do?</h3>
             <p className="text-center m">
@@ -28,6 +30,7 @@ const About = () => {
             </p>
             <div className="line"></div>
           </div>
+          {/* Section 3 */}
           <div className="m">
             <h3 className="text-primary">How much does it cost?</h3>
             <p className="text-center">
@@ -44,6 +47,7 @@ const About = () => {
             </p>
             <div className="line"></div>
           </div>
+          {/* Buttons */}
           <div className="buttons">
             <Link to="/register" className="btn btn-primary">
               Sign Up
