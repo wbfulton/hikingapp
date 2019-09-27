@@ -339,9 +339,13 @@ router.put('/join/:id', auth, async (req, res) => {
     joinFields.name = user.name;
     joinFields.messenger = user.messenger;
     joinFields.avatar = user.avatar;
-    if (profile.grade) joinFields.grade = profile.grade;
-    if (profile.type) joinFields.type = profile.type;
-    if (profile.skills) joinFields.skills = profile.skills;
+    if (profile) {
+      if (profile.grade) joinFields.grade = profile.grade;
+      if (profile.type) joinFields.type = profile.type;
+      if (profile.skills) joinFields.skills = profile.skills;
+    } else {
+      return res.status(400).json({ msg: 'You need a profile to join drives'})
+    }
 
     drive.group.unshift(joinFields);
     drive.seats = drive.seats - 1;

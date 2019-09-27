@@ -106,12 +106,14 @@ export const joinGroup = driveId => async dispatch => {
       type: UPDATE_GROUP,
       payload: {
         driveId,
-        group: res.data
+        group: res.data,
+        join: true
       }
     });
 
     dispatch(setAlert('Drive Joined', 'success'));
   } catch (err) {
+    console.error(err)
     dispatch(setAlert(err.response.statusText, 'danger'));
     // If error, sends a DRIVE_ERROR action and msg with status code
     dispatch({
@@ -130,7 +132,8 @@ export const leaveGroup = driveId => async dispatch => {
       type: UPDATE_GROUP,
       payload: {
         driveId,
-        group: res.data
+        group: res.data,
+        join: false
       }
     });
 

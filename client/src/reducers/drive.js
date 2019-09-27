@@ -47,13 +47,13 @@ export default function(state = initialState, action) {
         drives: state.drives.filter(drive => drive._id !== payload),
         loading: false
       };
-    // Updates Group In UI @ToDo Make seat counter responsive
+    // Updates Group In UI
     case UPDATE_GROUP:
       return {
         ...state,
         drives: state.drives.map(drive =>
           drive._id === payload.driveId
-            ? { ...drive, group: payload.group }
+            ? { ...drive, group: payload.group, seats: payload.join ? drive.seats - 1 : drive.seats + 1}
             : drive
         ),
         loading: false

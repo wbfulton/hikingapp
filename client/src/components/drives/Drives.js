@@ -20,9 +20,9 @@ const Drives = ({ getDrives, drive: { drives, loading } }) => {
     <Spinner />
   ) : (
     <Fragment>
-      <h1 class="large text-primary">Drives</h1>
-      <p class="lead">
-        <i class="fas fa-car"></i> Welcome to the community!
+      <h1 className="large text-primary">Drives</h1>
+      <p className="lead">
+        <i className="fas fa-car"></i> Welcome to the community!
       </p>
       <DriveForm />
       {drives.map(drive => (
