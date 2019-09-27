@@ -11,6 +11,7 @@ const ProfileAbout = ({
   }
 }) => (
   <div className="profile-about bg-light p-2">
+    {/* Bio */}
     {bio && (
       <Fragment>
         <h2 className="text-primary">{name}'s Bio</h2>
@@ -18,6 +19,7 @@ const ProfileAbout = ({
         <div className="line"></div>
       </Fragment>
     )}
+    {/* Skill Set */}
     <h2 className="text-primary">Skill Set</h2>
     <div className="skills">
       {skills.map((skill, index) => (
@@ -26,6 +28,7 @@ const ProfileAbout = ({
         </div>
       ))}
     </div>
+    {/* Resort */}
     {resort && (
       <Fragment>
         <div className="line"></div>
@@ -35,6 +38,7 @@ const ProfileAbout = ({
         </div>
       </Fragment>
     )}
+    {/* Ski Pass */}
     {pass && (
       <Fragment>
         <div className="line"></div>
@@ -47,6 +51,7 @@ const ProfileAbout = ({
   </div>
 );
 
+// Defines prop types for component
 ProfileAbout.propTypes = {
   profile: PropTypes.object.isRequired
 };

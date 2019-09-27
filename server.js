@@ -3,18 +3,18 @@ const connectDB = require('./config/db'); // for connecting db
 
 const app = express(); // creates instance of express
 
-// Connects Database
+// Connects to MongoDB Database through AtlasDB
 connectDB();
 
 // Init Middleware
 app.use(express.json({ extended: false }));
 
-// get for testing
+// Get Route for Testing
 app.get('/', (req, res, next) => {
     res.send('API Running');
 })
 
-// Define Routes
+// Routing
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/posts', require('./routes/api/posts'));
 app.use('/api/drives', require('./routes/api/drives'));

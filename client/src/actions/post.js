@@ -66,7 +66,6 @@ export const getMyPosts = () => async dispatch => {
 };
 
 // Add Like
-// id is the postId
 export const addLike = postId => async dispatch => {
   try {
     const res = await axios.put(`/api/posts/like/${postId}`);
@@ -85,7 +84,6 @@ export const addLike = postId => async dispatch => {
 };
 
 // Remove Like
-// id is the postId
 export const removeLike = postId => async dispatch => {
   try {
     const res = await axios.put(`/api/posts/unlike/${postId}`);
@@ -103,7 +101,7 @@ export const removeLike = postId => async dispatch => {
   }
 };
 
-// Add Post
+// Add Post, Shows banner
 export const addPost = formData => async dispatch => {
   const config = {
     header: {
@@ -129,27 +127,29 @@ export const addPost = formData => async dispatch => {
   }
 };
 
-// Delete Post
+// Delete Post, Confirm pop up shows, Shows banner
 export const deletePost = id => async dispatch => {
-  try {
-    await axios.delete(`/api/posts/${id}`);
+  if (window.confirm('Are you sure? This can NOT be undone!')) {
+    try {
+      await axios.delete(`/api/posts/${id}`);
 
-    dispatch({
-      type: DELETE_POST,
-      payload: id
-    });
+      dispatch({
+        type: DELETE_POST,
+        payload: id
+      });
 
-    dispatch(setAlert('Post Removed', 'success'));
-  } catch (err) {
-    // If error, sends a POST_ERROR action and msg with status code
-    dispatch({
-      type: POST_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    });
+      dispatch(setAlert('Post Removed', 'success'));
+    } catch (err) {
+      // If error, sends a POST_ERROR action and msg with status code
+      dispatch({
+        type: POST_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status }
+      });
+    }
   }
 };
 
-// Add Comment
+// Add Comment, Shows banner
 export const addComment = (postId, formData) => async dispatch => {
   const config = {
     header: {
@@ -158,7 +158,11 @@ export const addComment = (postId, formData) => async dispatch => {
   };
 
   try {
-    const res = await axios.post(`/api/posts/comment/${postId}`, formData, config);
+    const res = await axios.post(
+      `/api/posts/comment/${postId}`,
+      formData,
+      config
+    );
 
     dispatch({
       type: ADD_COMMENT,
@@ -175,9 +179,8 @@ export const addComment = (postId, formData) => async dispatch => {
   }
 };
 
-// Delete Comment
+// Delete Comment, Shows banner
 export const deleteComment = (postId, commentId) => async dispatch => {
-
   try {
     await axios.delete(`/api/posts/comment/${postId}/${commentId}`);
 

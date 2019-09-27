@@ -5,6 +5,7 @@ import rootReducer from './reducers';
 
 const initialState = {};
 
+// thunk allows for asynchrous actions
 const middleware = [thunk];
 
 // creates redux store (cloud) with main reducer, empty state, and dev tools

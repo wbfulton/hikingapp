@@ -10,6 +10,7 @@ import {
   LOGOUT,
   CLEAR_PROFILE
 } from './types';
+// function thats sets auth token to header
 import setAuthToken from '../utils/setAuthToken';
 
 // Load User
@@ -40,6 +41,7 @@ export const register = ({
   messenger,
   password
 }) => async dispatch => {
+  // sets header for message
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -77,6 +79,7 @@ export const register = ({
 
 // Login User
 export const login = (email, password) => async dispatch => {
+  // sets header for message
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -110,8 +113,8 @@ export const login = (email, password) => async dispatch => {
   }
 };
 
-// Logout / Clear PRofile
+// Logout / Clear Profile
 export const logout = () => dispatch => {
-  dispatch({ type: CLEAR_PROFILE});
+  dispatch({ type: CLEAR_PROFILE });
   dispatch({ type: LOGOUT });
 };

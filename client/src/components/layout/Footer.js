@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Footer that has developer contact information
 const Footer = () => {
   return (
     <footer className="footer-dark">

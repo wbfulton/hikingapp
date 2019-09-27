@@ -11,7 +11,7 @@ const Profile = require('../../models/Profile');
 const Drive = require('../../models/Drive');
 
 // @route  Get api/drives
-// @desc   Gets all drives, Filters expired drives and full drives
+// @desc   Returns all filtered drives, filters expired drives and full drives
 // @access Private
 router.get('/', auth, async (req, res) => {
   try {
@@ -28,7 +28,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // @route  Get api/drives/:id
-// @desc   Gets a drive by id
+// @desc   Returns a drive by ID
 // @access Private
 router.get('/:id', auth, async (req, res) => {
   try {
@@ -47,7 +47,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // @route  GET api/drives/dashboard/me
-// @desc   Get all drives a user is in
+// @desc   Returns all drives a user is in
 // @access Private
 router.get('/dashboard/me', auth, async (req, res) => {
   try {
@@ -65,6 +65,9 @@ router.get('/dashboard/me', auth, async (req, res) => {
 
 // @route  POST api/drives
 // @desc   Create a drive and initialize group for that drive
+//         Returns created drive
+//         leavingDate must be in correct format and be the current
+//         date or a future date
 // @access Private
 router.post(
   '/',
@@ -86,22 +89,18 @@ router.post(
           const y = curr.getFullYear();
 
           // Checks format of input date
-          if (
-            date.length !== 3 ||
-            leavingDate.length !== 10 
-          ) {
+          if (date.length !== 3 || leavingDate.length !== 10) {
             throw new Error('Invalid Date, Check Zeroes');
           }
 
           // Checks if input date is not in future or not current
           if (
-            date[0] < m ||
-            (date[0] <= m && date[1] < d) ||
+            (date[0] < m && date[2] == y) ||
+            (date[0] <= m && date[1] < d && date[2] == y) ||
             date[2] < y ||
             date[0] > 12 ||
             date[1] > 31 ||
             date[1] <= 0
-            
           ) {
             throw new Error('Please Enter a Current or Future Date');
           }
@@ -168,7 +167,9 @@ router.post(
 );
 
 // @route  PUT api/drives/:id
-// @desc   Update a drives info
+// @desc   Update a drives info, leavingDate must be current date or future date
+//         leavingDate must also be correct format
+//         Returns updated drive
 // @access Private
 router.put(
   '/:id',
@@ -177,7 +178,37 @@ router.put(
     [
       check('leavingDate', 'Date is required')
         .not()
-        .isEmpty(),
+        .isEmpty()
+        .custom(leavingDate => {
+          // Splits date into m, d, y and Ints
+          let date = leavingDate.split('/');
+          date = date.map(str => parseInt(str));
+
+          // Gets current date
+          const curr = new Date();
+          const d = curr.getDate();
+          const m = curr.getMonth();
+          const y = curr.getFullYear();
+
+          // Checks format of input date
+          if (date.length !== 3 || leavingDate.length !== 10) {
+            throw new Error('Invalid Date, Check Zeroes');
+          }
+
+          // Checks if input date is not in future or not current
+          if (
+            (date[0] < m && date[2] == y) ||
+            (date[0] <= m && date[1] < d && date[2] == y) ||
+            date[2] < y ||
+            date[0] > 12 ||
+            date[1] > 31 ||
+            date[1] <= 0
+          ) {
+            throw new Error('Please Enter a Current or Future Date');
+          }
+
+          return true;
+        }),
       check('leavingTime', 'Time is required')
         .not()
         .isEmpty(),
@@ -250,7 +281,7 @@ router.put(
 );
 
 // @route  DELETE api/drives/:id
-// @desc   Deletes a drive
+// @desc   Deletes a drive. Returns a json message
 // @access Private
 router.delete('/:id', auth, async (req, res) => {
   try {
@@ -273,16 +304,17 @@ router.delete('/:id', auth, async (req, res) => {
     if (err.kind === 'ObjectId') {
       return res.status(400).json({ msg: 'Drive not found' });
     }
+    res.status(500).send('Server Error');
   }
 });
 
 // @route  PUT api/drives/join/:id
-// @desc   Joins a drive
+// @desc   Joins a drive. Returns the updated group array
 // @access Private
 router.put('/join/:id', auth, async (req, res) => {
   try {
     const drive = await Drive.findById(req.params.id);
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(req.user.id).select('-password');
     const profile = await Profile.findOne({ user: req.user.id });
 
     // Check if drive exists
@@ -323,11 +355,12 @@ router.put('/join/:id', auth, async (req, res) => {
     if (err.kind === 'ObjectId') {
       return res.status(400).json({ msg: 'Drive not found' });
     }
+    res.status(500).send('Server Error');
   }
 });
 
 // @route  PUT api/drives/join/:id
-// @desc   Leaves a drive
+// @desc   Leaves a drive. Returns the updated group array
 // @access Private
 router.put('/leave/:id', auth, async (req, res) => {
   try {
@@ -361,11 +394,12 @@ router.put('/leave/:id', auth, async (req, res) => {
     if (err.kind === 'ObjectId') {
       return res.status(400).json({ msg: 'Drive not found' });
     }
+    res.status(500).send('Server Error');
   }
 });
 
 // @route  POST api/drives/comment/:id
-// @desc   Comment on a post
+// @desc   Comment on a post. Returns the updated comment array
 // @access Private
 router.post(
   '/comment/:id',
@@ -412,7 +446,7 @@ router.post(
 );
 
 // @route  DELETE api/drives/comment/:id/:comment_id
-// @desc   Delete comment on a post
+// @desc   Delete comment on a post. Returns the updated comment array
 // @access Private
 router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
   try {

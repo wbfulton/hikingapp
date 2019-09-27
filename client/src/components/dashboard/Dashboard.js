@@ -8,17 +8,18 @@ import MyDrives from './MyDrives';
 import MyPosts from './MyPosts';
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 
-// useEffect will getCurrentProfile every time Dashboard comp is used
 const Dashboard = ({
   getCurrentProfile,
   deleteAccount,
   auth: { user },
   profile: { profile, loading }
 }) => {
+  // Calls getCurrentProfile() every page refresh
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
 
+  // Shows Spinner when loading
   return loading && profile === null ? (
     <Spinner />
   ) : (
@@ -34,15 +35,19 @@ const Dashboard = ({
           <MyPosts />
 
           <div className="my-2 p-1">
-            <button className='btn btn-danger' onClick={() => deleteAccount()}>
+            <button className="btn btn-danger" onClick={() => deleteAccount()}>
               <i className="fas fa-user-minus"></i> Delete My Account
             </button>
           </div>
         </Fragment>
       ) : (
         <Fragment>
+          {' '}
+          {/* If there is no profile */}
           <p>No profile created, please create one</p>
-          <Link to='/create-profile' className='btn btn-primary my-1'>Create Profile</Link>
+          <Link to="/create-profile" className="btn btn-primary my-1">
+            Create Profile
+          </Link>
         </Fragment>
       )}
     </Fragment>
@@ -56,6 +61,7 @@ Dashboard.propTypes = {
   profile: PropTypes.object.isRequired
 };
 
+// Sets auth and profile props to their respective states
 const mapStateToProps = state => ({
   auth: state.auth,
   profile: state.profile

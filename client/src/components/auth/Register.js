@@ -6,6 +6,8 @@ import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
+  // Creates a variable formData with fields that can be updated through setFormData
+  // useState hook allows for state to be saved during session
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -39,10 +41,12 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 
   return (
     <Fragment>
+      {/* Top */}
       <h1 className="large text-primary">Sign Up</h1>
       <p className="lead">
         <i className="fas fa-user"></i> Create Your Account
       </p>
+      {/* Form */}
       <form className="form" onSubmit={e => onSubmit(e)}>
         <div className="form-group">
           <input
@@ -106,6 +110,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
         </div>
         <input type="submit" className="btn btn-primary" value="Sign Up" />
       </form>
+      {/* Bottom */}
       <p className="my-1">
         Already have an account? <Link to="/login">Sign In</Link>
       </p>

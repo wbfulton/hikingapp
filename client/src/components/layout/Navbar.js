@@ -53,7 +53,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <nav className="navbar bg-dark">
       <h1>
         <Link to="/">
-          <i className="fas fa-skiing"></i> Husky Snow Club
+          <i className="fas fa-skiing"></i> UW Rideshare
         </Link>
       </h1>
       {!loading && (

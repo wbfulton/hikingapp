@@ -6,11 +6,12 @@ import DriveItem from '../drives/DriveItem';
 import { getMyDrives } from '../../actions/drive';
 
 const Drives = ({ getMyDrives, drive: { drives, loading } }) => {
-  // Fetchs Posts when component renders
+  // Fetchs Drives each refresh
   useEffect(() => {
     getMyDrives();
   }, [getMyDrives]);
 
+  // Shows spinner when loading
   return loading ? (
     <Spinner />
   ) : (
@@ -18,7 +19,7 @@ const Drives = ({ getMyDrives, drive: { drives, loading } }) => {
       <p className="large lead text-primary p-1">My Drives</p>
       {drives.length > 0 ? (
         <Fragment>
-          <div className="posts">
+          <div className="posts"> {/* Displays all Users Drives */}
             {drives.map(drive => (
               <DriveItem key={drive._id} drive={drive} />
             ))}
@@ -33,11 +34,13 @@ const Drives = ({ getMyDrives, drive: { drives, loading } }) => {
   );
 };
 
+// Defines props to use in the component
 Drives.propTypes = {
   getMyDrives: PropTypes.func.isRequired,
   drive: PropTypes.object.isRequired
 };
 
+// Sets drive prop to current drive state
 const mapStateToProps = state => ({
   drive: state.drive
 });

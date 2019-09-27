@@ -6,18 +6,19 @@ import PostItem from '../posts/PostItem';
 import { getMyPosts } from '../../actions/post';
 
 const Posts = ({ getMyPosts, post: { posts, loading } }) => {
-  // Fetchs Posts when component renders
+  // Fetchs Posts each page refresh
   useEffect(() => {
     getMyPosts();
   }, [getMyPosts]);
 
+  // Shows Spinner when loading
   return loading ? (
     <Spinner />
   ) : (
     <Fragment>
       <p className="large lead text-primary p-1">My Posts</p>
       {posts.length > 0 ? (
-        <Fragment>
+        <Fragment> {/* Displays All Users Posts */}
           <div className="posts">
             {posts.map(post => (
               <PostItem key={post._id} post={post} />

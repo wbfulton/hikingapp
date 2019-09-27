@@ -15,7 +15,7 @@ const config = require('config'); // imports config file
 const User = require('../../models/User'); // mongoose User model
 
 // @route  POST api/users
-// @desc   Register user (register)
+// @desc   Register user (register). Returns jsonwebtoken with user payload
 // @access Public
 router.post(
   '/',
@@ -24,14 +24,13 @@ router.post(
     check('name', 'Name is required')
       .not()
       .isEmpty(),
-    check('email', 'Please include a valid email')
-      .isEmail(),
+    check('email', 'Please include a valid email').isEmail(),
     check('messenger', 'Messenger link is required')
       .not()
       .isEmpty()
       .custom(messenger => {
         // Checks messenger link
-        if(!messenger.contains('m.me/')){
+        if (!messenger.includes('m.me/')) {
           throw new Error('Invalid Messenger Link');
         }
 
@@ -97,7 +96,7 @@ router.post(
       jwt.sign(
         payload,
         config.get('jwtSecret'),
-        { expiresIn: 3600000000 },
+        { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
           res.json({ token });

@@ -26,6 +26,7 @@ const ProfileItem = ({
             Message
         </a>
       </div>
+      {/* Maps thorugh skills to display all skills */}
       <ul>
         {skills.slice(0, 4).map((skill, index) => (
           <li key={index} className="text-primary">

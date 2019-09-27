@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 
-// if not authenticated, redirects to login page
+// If not authenticated, redirects to login page
 const PrivateRoute = ({
   component: Component,
   auth: { isAuthenticated, loading },
@@ -22,11 +22,15 @@ const PrivateRoute = ({
   />
 );
 
+// Defineds prop types for component
 PrivateRoute.propTypes = {
   auth: PropTypes.object.isRequired
 };
+
+// Sets auth prop to current auth state
 const mapStateToProps = state => ({
   auth: state.auth
 });
 
+// Connects component with redux
 export default connect(mapStateToProps)(PrivateRoute);

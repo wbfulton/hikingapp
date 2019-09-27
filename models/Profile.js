@@ -1,14 +1,9 @@
 const mongoose = require('mongoose'); // imports mongoose
 
-// create the Profile Schema contains:
-//      grade
-//      type is board or ski,
-//      skills
-//      resort is favorite resort
-//      bio
-//      driver, indicates if they are a driver or not
-//      social, media links
-//      date, date created
+// PostSchema holds a User model
+// Required Fields type, skills, driver
+// Optional Fields grade, resort, pass, bio, social links (twitter, facebook, instagram)
+// Default field date timestamped to current time
 const ProfileSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,

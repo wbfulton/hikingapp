@@ -3,7 +3,7 @@ const config = require('config'); // imports config package
 const db = config.get('mongoURI'); // gets mongoDB URI to connect
 
 
-// creates async method to connect to mongoose
+// async function to connect to mongoose
 // we pass in options to avoid deprecated methods
 const connectDB = async () => {
     try {

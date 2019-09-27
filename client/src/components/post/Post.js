@@ -9,10 +9,12 @@ import CommentItem from '../post/CommentItem';
 import { getPost } from '../../actions/post';
 
 const Post = ({ getPost, post: { post, loading }, match }) => {
+  // Calls getPost() once every page refresh
   useEffect(() => {
     getPost(match.params.id);
   }, [getPost, match.params.id]);
 
+  // Shows Spinner when loading
   return loading || post == null ? (
     <Spinner />
   ) : (
@@ -21,7 +23,8 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
         Back To Posts
       </Link>
       <PostItem post={post} showActions={false} />
-      <CommentForm postId={post._id}/>
+      <CommentForm postId={post._id} />
+      {/* Shows All Comments */}
       <div className="comments">
         {post.comments.map(comment => (
           <CommentItem key={comment._id} comment={comment} postId={post._id} />

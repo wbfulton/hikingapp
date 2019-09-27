@@ -9,7 +9,8 @@ import {
   ACCOUNT_DELETED
 } from '../actions/types';
 
-// default not authenticated
+// Default state is not Authenticate
+// Token is stored in browsers local storage
 const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: null,
@@ -23,6 +24,7 @@ export default function(state = initialState, action) {
 
   // CHANGE SUCCESS CASE TO CHECK FOR VENMO
   switch (type) {
+    // Authenticates User in state
     case USER_LOADED:
       return {
         ...state,
@@ -31,7 +33,7 @@ export default function(state = initialState, action) {
         user: payload
       };
     case REGISTER_SUCCESS: // NEEDS TO BE OWN CASE
-    case LOGIN_SUCCESS: // NEEDS TO BE OWN
+    case LOGIN_SUCCESS: // Authenticates User in state
       localStorage.setItem('token', payload.token);
       return {
         ...state,
@@ -39,6 +41,7 @@ export default function(state = initialState, action) {
         isAuthenticated: true,
         loading: false
       };
+    // Unauthenicates User in the state
     case REGISTER_FAIL:
     case AUTH_ERROR:
     case LOGIN_FAIL:

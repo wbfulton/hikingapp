@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { createProfile } from '../../actions/profile';
 
 const CreateProfile = ({ createProfile, history }) => {
-  // sets FormData and setFrom Data to these initial states
+  // sets FormData to these initial states, setFormData updates these fields
   const [formData, setFormData] = useState({
     grade: '',
     type: '',
@@ -19,6 +19,7 @@ const CreateProfile = ({ createProfile, history }) => {
     instagram: ''
   });
 
+  // initalizes boolean variable to display social inputs on click
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
   const {
@@ -34,12 +35,14 @@ const CreateProfile = ({ createProfile, history }) => {
     instagram
   } = formData;
 
+  // Updates fields when user inputs data
   const onChange = e =>
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
 
+  // Submits data with createProfile() and prevents an empty entry
   const onSubmit = e => {
     e.preventDefault();
     createProfile(formData, history);
@@ -47,13 +50,16 @@ const CreateProfile = ({ createProfile, history }) => {
 
   return (
     <Fragment>
+      {/* Top Info */}
       <h1 className="large text-primary">Create Your Profile</h1>
       <p className="lead">
         <i className="fas fa-user"></i> Let's get some information to make your
         profile stand out
       </p>
       <small>* = required field</small>
+      {/* Form */}
       <form className="form" onSubmit={e => onSubmit(e)}>
+        {/* Grade Selector */}
         <div className="form-group">
           <select name="grade" value={grade} onChange={e => onChange(e)}>
             <option value="0">Select Grade</option>
@@ -67,6 +73,7 @@ const CreateProfile = ({ createProfile, history }) => {
             Give us an idea of where you are at UW
           </small>
         </div>
+        {/* Skier Type Selector */}
         <div className="form-group">
           <select name="type" value={type} onChange={e => onChange(e)}>
             <option value="0">* Select Type</option>
@@ -78,6 +85,7 @@ const CreateProfile = ({ createProfile, history }) => {
             * Let us know how you shred the mountain
           </small>
         </div>
+        {/* Driver Selector */}
         <div className="form-group">
           <div className="form-group">
             <select name="driver" value={driver} onChange={e => onChange(e)}>
@@ -89,6 +97,9 @@ const CreateProfile = ({ createProfile, history }) => {
               * Let us know if you can haul ski bums
             </small>
           </div>
+        </div>
+        {/* Resort Input */}
+        <div className="form-group">
           <input
             type="text"
             placeholder="Resort"
@@ -98,6 +109,7 @@ const CreateProfile = ({ createProfile, history }) => {
           />
           <small className="form-text">What is your favorite resort?</small>
         </div>
+        {/* Ski Pass Input */}
         <div className="form-group">
           <input
             type="text"
@@ -111,6 +123,7 @@ const CreateProfile = ({ createProfile, history }) => {
             one)
           </small>
         </div>
+        {/* Skills */}
         <div className="form-group">
           <input
             type="text"
@@ -124,6 +137,7 @@ const CreateProfile = ({ createProfile, history }) => {
             Sendin' It )
           </small>
         </div>
+        {/* Bio */}
         <div className="form-group">
           <textarea
             placeholder="A short bio of yourself"
@@ -133,7 +147,7 @@ const CreateProfile = ({ createProfile, history }) => {
           ></textarea>
           <small className="form-text">Tell us a little about yourself</small>
         </div>
-
+        {/* Social Inputs */}
         <div className="my-2">
           <button
             onClick={() => toggleSocialInputs(!displaySocialInputs)}
@@ -144,7 +158,7 @@ const CreateProfile = ({ createProfile, history }) => {
           </button>
           <span>Optional</span>
         </div>
-
+        {/* Only displays social inputs when selected */}
         {displaySocialInputs && (
           <Fragment>
             <div className="form-group social-input">
@@ -180,7 +194,7 @@ const CreateProfile = ({ createProfile, history }) => {
             </div>
           </Fragment>
         )}
-
+        {/* Submit and Back Button */}
         <input type="submit" className="btn btn-primary my-1" />
         <Link className="btn btn-light my-1" to="/dashboard">
           Go Back
@@ -190,10 +204,12 @@ const CreateProfile = ({ createProfile, history }) => {
   );
 };
 
+// Defines prop types for componenet
 CreateProfile.propTypes = {
   createProfile: PropTypes.func.isRequired
 };
 
+// Connects component with redux
 export default connect(
   null,
   { createProfile }

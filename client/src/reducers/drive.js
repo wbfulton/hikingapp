@@ -2,9 +2,11 @@ import {
   GET_DRIVES,
   DRIVE_ERROR,
   DELETE_DRIVE,
-  ADD_DRIVE
+  ADD_DRIVE,
+  UPDATE_GROUP
 } from '../actions/types';
 
+// Initializes the State for drives
 const initialState = {
   drives: [],
   drive: null,
@@ -17,6 +19,7 @@ export default function(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    // Puts Drives into UI
     case GET_DRIVES:
       return {
         ...state,
@@ -30,16 +33,29 @@ export default function(state = initialState, action) {
         drives: [payload, ...state.drives],
         loading: false
       };
+    // Throws Error to UI
     case DRIVE_ERROR:
       return {
         ...state,
         error: payload,
         loading: false
       };
+    // Deletes Drive From UI
     case DELETE_DRIVE:
       return {
         ...state,
         drives: state.drives.filter(drive => drive._id !== payload),
+        loading: false
+      };
+    // Updates Group In UI @ToDo Make seat counter responsive
+    case UPDATE_GROUP:
+      return {
+        ...state,
+        drives: state.drives.map(drive =>
+          drive._id === payload.driveId
+            ? { ...drive, group: payload.group }
+            : drive
+        ),
         loading: false
       };
     default:

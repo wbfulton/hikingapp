@@ -193,15 +193,9 @@ img {
 
 .bg-danger,
 .badge-danger,
+.btn-danger,
 .alert-danger {
   background: var(--danger-color);
-  color: #fff;
-}
-
-.btn-danger {
-  background: var(--danger-color);
-  position: absolute;
-  right: 50px;
   color: #fff;
 }
 

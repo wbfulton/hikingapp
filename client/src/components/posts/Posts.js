@@ -7,11 +7,12 @@ import PostForm from './PostForm';
 import { getPosts } from '../../actions/post';
 
 const Posts = ({ getPosts, post: { posts, loading } }) => {
-  // Fetchs Posts when component renders
+  // Fetchs Posts each time page loads
   useEffect(() => {
     getPosts();
   }, [getPosts]);
 
+  // Shows Spinner when loading
   return loading ? (
     <Spinner />
   ) : (
@@ -21,6 +22,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
         <i className="fas fa-user"></i> Welcome to the community!
       </p>
       <PostForm />
+      {/* Shows all posts */}
       <div className="posts">
         {posts.map(post => (
           <PostItem key={post._id} post={post} />
@@ -30,15 +32,18 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
   );
 };
 
+// Defines props for componet
 Posts.propTypes = {
   getPosts: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired
 };
 
+// Sets post prop to current post state
 const mapStateToProps = state => ({
   post: state.post
 });
 
+// Connects component to redux
 export default connect(
   mapStateToProps,
   { getPosts }

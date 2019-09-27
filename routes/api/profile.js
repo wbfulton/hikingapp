@@ -8,10 +8,10 @@ const { check, validationResult } = require('express-validator');
 // Imported Models
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
-const Post = require('../../models/Post')
+const Post = require('../../models/Post');
 
 // @route  GET api/profile/me
-// @desc   Get current users profile
+// @desc   Returns current users profile
 // @access Private
 router.get('/me', auth, async (req, res, next) => {
   try {
@@ -33,12 +33,16 @@ router.get('/me', auth, async (req, res, next) => {
 });
 
 // @route  GET api/profile
-// @desc   Get all profiles
+// @desc   Returns all profiles
 // @access Public
 router.get('/', async (req, res) => {
   try {
     // adds name and avatar from user collection
-    const profiles = await Profile.find().populate('user', ['name', 'avatar', 'messenger']);
+    const profiles = await Profile.find().populate('user', [
+      'name',
+      'avatar',
+      'messenger'
+    ]);
     res.json(profiles);
   } catch (err) {
     console.error(err.message);
@@ -47,7 +51,7 @@ router.get('/', async (req, res) => {
 });
 
 // @route  GET api/profile/user/:user_id
-// @desc   Get profile by user ID
+// @desc   Returns a profile by user ID
 // @access Public
 router.get('/user/:user_id', async (req, res) => {
   try {
@@ -72,7 +76,7 @@ router.get('/user/:user_id', async (req, res) => {
 });
 
 // @route  POST api/profile
-// @desc   Create or Update user profile
+// @desc   Create or Update user profile. Returns updated/created profile
 // @access Private
 router.post(
   '/',
@@ -162,7 +166,7 @@ router.post(
 );
 
 // @route  DELETE api/profile
-// @desc   Delete profile, user & posts
+// @desc   Delete profile, user & posts. Returns json message
 // @access Private
 router.delete('/', auth, async (req, res) => {
   try {

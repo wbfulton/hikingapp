@@ -26,8 +26,8 @@ const EditProfile = ({
 
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
-  // Gets the Current state of the profile and updates our form
-  // will run when loading
+  // Gets the current state of the profile every refresh
+  // Preloads fields in formData with the state of the current profile
   useEffect(() => {
     getCurrentProfile();
 
@@ -59,13 +59,14 @@ const EditProfile = ({
     instagram
   } = formData;
 
+  // Sets formData changes when user inputs fields
   const onChange = e =>
-    // Ternary operator for Driver boolean
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
 
+  // Submits data with createProfile() and prevents an empty submit
   const onSubmit = e => {
     e.preventDefault();
     createProfile(formData, history, true);
@@ -73,13 +74,16 @@ const EditProfile = ({
 
   return (
     <Fragment>
+      {/* Top Information */}
       <h1 className="large text-primary">Update Your Profile</h1>
       <p className="lead">
         <i className="fas fa-user"></i> Let's get some information to make your
         profile stand out
       </p>
       <small>* = required field</small>
+      {/* Form */}
       <form className="form" onSubmit={e => onSubmit(e)}>
+        {/* Grade */}
         <div className="form-group">
           <select name="grade" value={grade} onChange={e => onChange(e)}>
             <option value="0">Select Grade</option>
@@ -93,6 +97,7 @@ const EditProfile = ({
             Give us an idea of where you are at UW
           </small>
         </div>
+        {/* Type */}
         <div className="form-group">
           <select name="type" value={type} onChange={e => onChange(e)}>
             <option value="0">* Select Type</option>
@@ -104,6 +109,7 @@ const EditProfile = ({
             * Let us know how you shred the mountain
           </small>
         </div>
+        {/* Type */}
         <div className="form-group">
           <div className="form-group">
             <select name="driver" value={driver} onChange={e => onChange(e)}>
@@ -124,6 +130,7 @@ const EditProfile = ({
           />
           <small className="form-text">What is your favorite resort?</small>
         </div>
+        {/* Ski Pass */}
         <div className="form-group">
           <input
             type="text"
@@ -137,6 +144,7 @@ const EditProfile = ({
             one)
           </small>
         </div>
+        {/* Skills */}
         <div className="form-group">
           <input
             type="text"
@@ -150,6 +158,7 @@ const EditProfile = ({
             Sendin' It )
           </small>
         </div>
+        {/* Bio */}
         <div className="form-group">
           <textarea
             placeholder="A short bio of yourself"
@@ -159,7 +168,7 @@ const EditProfile = ({
           ></textarea>
           <small className="form-text">Tell us a little about yourself</small>
         </div>
-
+        {/* Social Media Links */}
         <div className="my-2">
           <button
             onClick={() => toggleSocialInputs(!displaySocialInputs)}
@@ -170,7 +179,7 @@ const EditProfile = ({
           </button>
           <span>Optional</span>
         </div>
-
+        {/* Links only display when toggled */}
         {displaySocialInputs && (
           <Fragment>
             <div className="form-group social-input">
@@ -183,7 +192,6 @@ const EditProfile = ({
                 onChange={e => onChange(e)}
               />
             </div>
-
             <div className="form-group social-input">
               <i className="fab fa-facebook fa-2x"></i>
               <input
@@ -206,7 +214,7 @@ const EditProfile = ({
             </div>
           </Fragment>
         )}
-
+        {/* Submit button and Back button */}
         <input type="submit" className="btn btn-primary my-1" />
         <Link className="btn btn-light my-1" to="/dashboard">
           Go Back
@@ -216,16 +224,19 @@ const EditProfile = ({
   );
 };
 
+// Defines prop types for component
 EditProfile.propTypes = {
   createProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
 };
 
+// Sets profile state with current profile state
 const mapStateToProps = state => ({
   profile: state.profile
 });
 
+// Connects component to redux
 export default connect(
   mapStateToProps,
   { createProfile, getCurrentProfile }

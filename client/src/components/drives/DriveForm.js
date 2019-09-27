@@ -18,17 +18,19 @@ const DriveForm = ({ addDrive }) => {
 
   const { leavingDate, leavingTime, resort, seats, description } = formData;
 
+  // Updates state of form data each time a field changes
   const onChange = e =>
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
 
-    const onSubmit = e => {
-        e.preventDefault();
-        addDrive(formData);
-        toggleDriveForm(!displayDriveForm)
-      };
+  // Calls addDrive() action. Prevents an empty submit. Hides form when posted
+  const onSubmit = e => {
+    e.preventDefault();
+    addDrive(formData);
+    toggleDriveForm(!displayDriveForm);
+  };
 
   return (
     <div className="post-form">
@@ -42,12 +44,11 @@ const DriveForm = ({ addDrive }) => {
         </button>
       </div>
 
+      {/* Displays when user clicks on Start a Trip button */}
       {displayDriveForm && (
         <Fragment>
-          <form
-            className="form my-1"
-            onSubmit={e => onSubmit(e)}
-          >
+          <form className="form my-1" onSubmit={e => onSubmit(e)}>
+            {/* Leaving Date */}
             <div className="form-group">
               <input
                 type="text"
@@ -61,6 +62,7 @@ const DriveForm = ({ addDrive }) => {
                 * What day are you leaving? (include zeroes e.g. 04/02/2019){' '}
               </small>
             </div>
+            {/* Leaving Time */}
             <div className="form-group">
               <input
                 type="text"
@@ -74,6 +76,7 @@ const DriveForm = ({ addDrive }) => {
                 * What time are you leaving? (e.g. 09:00 AM){' '}
               </small>
             </div>
+            {/* Resort */}
             <div className="form-group">
               <input
                 type="text"
@@ -85,6 +88,7 @@ const DriveForm = ({ addDrive }) => {
               />
               <small className="form-text">* Where are you going?</small>
             </div>
+            {/* Seats */}
             <div className="form-group">
               <input
                 type="number"
@@ -100,6 +104,7 @@ const DriveForm = ({ addDrive }) => {
                 * How many seats do you have? (NOT including yourself)
               </small>
             </div>
+            {/* Description */}
             <div className="form-group">
               <textarea
                 name="description"
@@ -111,11 +116,8 @@ const DriveForm = ({ addDrive }) => {
                 required
               ></textarea>
             </div>
-            <input
-              type="submit"
-              className="btn btn-dark my-1"
-              value="Post"
-            />
+            {/* Submit */}
+            <input type="submit" className="btn btn-dark my-1" value="Post" />
           </form>
         </Fragment>
       )}

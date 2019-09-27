@@ -6,10 +6,12 @@ import ProfileItem from './ProfileItem';
 import { getProfiles } from '../../actions/profile';
 
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
+  // Calls getProfils() every component refresh
   useEffect(() => {
     getProfiles();
   }, [getProfiles]);
 
+  // Shows spinner when loading
   return <Fragment>
       { loading ? 
         <Spinner /> : <Fragment>
@@ -28,15 +30,18 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
     </Fragment>
 };
 
+// Defines prop types for component
 Profiles.propTypes = {
   getProfiles: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
 };
 
+// Sets profile prop to current profile state
 const mapStateToProps = state => ({
   profile: state.profile
 });
 
+// Connects component to redux
 export default connect(
   mapStateToProps,
   { getProfiles }

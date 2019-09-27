@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { addPost } from '../../actions/post';
 
 const PostForm = ({ addPost }) => {
+  // Sets variable to keep track of user text input
   const [text, setText] = useState('');
-
+  // Sets variable to display or hide form
   const [displayPostForm, togglePostForm] = useState(false);
 
   return (
@@ -47,10 +48,12 @@ const PostForm = ({ addPost }) => {
   );
 };
 
+// Defines prop for component
 PostForm.propTypes = {
   addPost: PropTypes.func.isRequired
 };
 
+// Connect component with redux state
 export default connect(
   null,
   { addPost }

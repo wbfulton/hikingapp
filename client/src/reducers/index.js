@@ -5,7 +5,7 @@ import profile from './profile';
 import post from './post';
 import drive from './drive';
 
-// combines and exports reducers
+// Combines all reducers
 export default combineReducers({
   alert,
   auth,

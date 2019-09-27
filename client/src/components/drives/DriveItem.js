@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { deleteDrive } from '../../actions/drive';
+import { deleteDrive, joinGroup, leaveGroup } from '../../actions/drive';
 
 // Checks if the user is in the array
 const inArray = (auth, array) => {
@@ -15,9 +15,12 @@ const inArray = (auth, array) => {
   }
 };
 
+// Desconstructs drive to allow for easy access
 const DriveItem = ({
   auth,
   deleteDrive,
+  joinGroup,
+  leaveGroup,
   drive: {
     _id,
     user,
@@ -35,6 +38,7 @@ const DriveItem = ({
 }) => {
   return (
     <div className="post bg-white p-1 my-1">
+      {/* User Image */}
       <div>
         <Link to={`/profile/${user}`}>
           <img className="round-img" src={avatar} alt="" />
@@ -63,7 +67,13 @@ const DriveItem = ({
         {/* Only shows Join/Leave if you DO NOT own the drive */}
         {!auth.loading && auth.user._id !== user && (
           <Fragment>
-            <button type="button" className="btn btn-primary">
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={e =>
+                inArray(auth, group) ? leaveGroup(_id) : joinGroup(_id)
+              }
+            >
               <i className="fas fa-user-plus"></i>
               {/* Displays Join if in group, else Displays Leave */}
               <span> {inArray(auth, group) ? 'Leave' : 'Join'}</span>
@@ -76,7 +86,9 @@ const DriveItem = ({
         </Link>
         <Link to={`/drive-comments/${_id}`} className="btn btn-light">
           <i className="fas fa-comments"></i> Comments{' '}
-          <span className="comment-count">{comments.length}</span>
+          {comments.length > 0 && (
+            <span className="comment-count">{comments.length}</span>
+          )}
         </Link>
 
         {/* Delete and Edit button only shows if user owns post */}
@@ -103,7 +115,9 @@ const DriveItem = ({
 DriveItem.propTypes = {
   drive: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  deleteDrive: PropTypes.func.isRequired
+  deleteDrive: PropTypes.func.isRequired,
+  joinGroup: PropTypes.func.isRequired,
+  leaveGroup: PropTypes.func.isRequired
 };
 
 // Sets auth prop to the current state of auth
@@ -114,5 +128,5 @@ const mapStateToProps = state => ({
 // Exports Component, connect() is for redux
 export default connect(
   mapStateToProps,
-  { deleteDrive }
+  { deleteDrive, joinGroup, leaveGroup }
 )(DriveItem);

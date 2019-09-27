@@ -1,21 +1,27 @@
 import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import PrivateRoute from './components/routing/PrivateRoute';
+// Layout
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Landing from './components/layout/Landing';
 import About from './components/layout/About';
+import Alert from './components/layout/Alert';
+// Auth
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
-import Alert from './components/layout/Alert';
+// Dashboard
 import Dashboard from './components/dashboard/Dashboard';
+// Profile
 import CreateProfile from './components/profile-forms/CreateProfile';
 import EditProfile from './components/profile-forms/EditProfile';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
+// Posts
 import Posts from './components/posts/Posts';
 import Post from './components/post/Post';
+// Drives
 import Drives from './components/drives/Drives';
-import PrivateRoute from './components/routing/PrivateRoute';
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -38,6 +44,7 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Fragment>
+          {/* These elements do not involve complex routing */}
           <Navbar />
           <Route exact path="/" component={Landing} />
           <Route exact path="/about" component={About} />
@@ -62,11 +69,7 @@ const App = () => {
               <PrivateRoute exact path="/posts" component={Posts} />
               <PrivateRoute exact path="/posts/:id" component={Post} />
               <PrivateRoute exact path="/drives" component={Drives} />
-              <PrivateRoute
-                exact
-                path="/drives/:id"
-                component={Drives}
-              />
+              <PrivateRoute exact path="/drives/:id" component={Drives} />
             </Switch>
           </section>
           <Footer />

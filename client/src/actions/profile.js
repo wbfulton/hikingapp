@@ -67,7 +67,7 @@ export const getProfileById = userId => async dispatch => {
   }
 };
 
-// Create or Update Profile
+// Create or Update Profile, Shows Banner. Redirects to Dashboard
 export const createProfile = (
   formData,
   history,
@@ -107,7 +107,7 @@ export const createProfile = (
   }
 };
 
-// Delete Profile and Account
+// Delete Profile and Account, Pop up confirm window, Banner shows
 export const deleteAccount = () => async dispatch => {
   if (window.confirm('Are you sure? This can NOT be undone!')) {
     try {

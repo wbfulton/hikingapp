@@ -40,6 +40,7 @@ const CommentItem = ({
   );
 };
 
+// Defines props for component
 CommentItem.propTypes = {
   postId: PropTypes.number.isRequired,
   comment: PropTypes.object.isRequired,
@@ -47,6 +48,7 @@ CommentItem.propTypes = {
   auth: PropTypes.object.isRequired
 };
 
+// Sets auth prop to the current auth state
 const mapStateToProps = state => ({
   auth: state.auth
 });

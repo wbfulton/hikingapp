@@ -25,6 +25,7 @@ const PostItem = ({
 }) => {
   return (
     <div className="post bg-white p-1 my-1">
+      {/* User Image */}
       <div>
         <Link to={`/profile/${user}`}>
           <img className="round-img" src={avatar} alt="" />
@@ -36,8 +37,10 @@ const PostItem = ({
         <p className="post-date">
           Posted on <Moment format="MM/DD/YYYY">{date}</Moment>
         </p>
+        {/* Only shows likes, comments, delete button when true */}
         {showActions && (
           <Fragment>
+            {/* Likes*/}
             <button
               onClick={e =>
                 inArray(auth, likes) ? removeLike(_id) : addLike(_id)
@@ -50,6 +53,7 @@ const PostItem = ({
               <i className="fas fa-thumbs-up"></i>
               {likes.length > 0 && <span> {likes.length}</span>}
             </button>
+            {/* Comments */}
             <Link
               to={`/posts/${_id}`}
               className={
@@ -61,6 +65,7 @@ const PostItem = ({
                 <span className="comment-count">{comments.length}</span>
               )}
             </Link>
+            {/* Delete Button */}
             {!auth.loading && user === auth.user._id && (
               <Fragment>
                 <button
@@ -79,10 +84,12 @@ const PostItem = ({
   );
 };
 
+// Sets showActions default to true
 PostItem.defaultProps = {
   showActions: true
 };
 
+// Defines props for component
 PostItem.propTypes = {
   post: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
@@ -91,10 +98,12 @@ PostItem.propTypes = {
   deletePost: PropTypes.func.isRequired
 };
 
+// Sets auth prop to current auth state
 const mapStateToProps = state => ({
   auth: state.auth
 });
 
+// Connects component to redux
 export default connect(
   mapStateToProps,
   { addLike, removeLike, deletePost }
