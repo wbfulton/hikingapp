@@ -30,10 +30,12 @@ export const ADD_POST = 'ADD_POST';
 
 // Drive Types
 export const GET_DRIVES = 'GET_DRIVES';
+export const GET_DRIVE = 'GET_DRIVE';
 export const DRIVE_ERROR = 'DRIVE_ERROR';
 export const DELETE_DRIVE = 'DELETE_DRIVE';
 export const ADD_DRIVE = 'ADD_DRIVE';
 export const UPDATE_GROUP = 'UPDATE_GROUP';
+export const DRIVE_PROFILES = 'DRIVE_PROFILES'
 
 // Comment Types
 export const ADD_COMMENT = 'ADD_COMMENT';

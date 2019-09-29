@@ -125,10 +125,12 @@ const DriveForm = ({ addDrive }) => {
   );
 };
 
+// Defines proptypes for DriveForm component
 DriveForm.propTypes = {
   addDrive: PropTypes.func.isRequired
 };
 
+// Connects component to redux
 export default connect(
   null,
   { addDrive }

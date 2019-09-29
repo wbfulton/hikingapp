@@ -2,10 +2,13 @@ import axios from 'axios';
 import { setAlert } from './alert';
 import {
   GET_DRIVES,
+  GET_DRIVE,
   DRIVE_ERROR,
   DELETE_DRIVE,
   ADD_DRIVE,
-  UPDATE_GROUP
+  UPDATE_GROUP,
+  ADD_COMMENT,
+  REMOVE_COMMENT
 } from './types';
 
 // Gets All Open and Valid Drives
@@ -15,6 +18,24 @@ export const getDrives = () => async dispatch => {
 
     dispatch({
       type: GET_DRIVES,
+      payload: res.data
+    });
+  } catch (err) {
+    // If error, sends a DRIVE_ERROR action and msg with status code
+    dispatch({
+      type: DRIVE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Gets a Drive By ID
+export const getDrive = id => async dispatch => {
+  try {
+    const res = await axios.get(`/api/drives/${id}`);
+
+    dispatch({
+      type: GET_DRIVE,
       payload: res.data
     });
   } catch (err) {
@@ -113,8 +134,18 @@ export const joinGroup = driveId => async dispatch => {
 
     dispatch(setAlert('Drive Joined', 'success'));
   } catch (err) {
-    console.error(err)
-    dispatch(setAlert(err.response.statusText, 'danger'));
+    // @toDo find a way to seperate errors
+    if (err.response.status === 400) {
+      dispatch(
+        setAlert(
+          'You need a profile to join drives. If you have a profile, refresh page and try again',
+          'danger'
+        )
+      );
+    } else {
+      dispatch(setAlert(err.response.statusText, 'danger'));
+    }
+
     // If error, sends a DRIVE_ERROR action and msg with status code
     dispatch({
       type: DRIVE_ERROR,
@@ -125,21 +156,73 @@ export const joinGroup = driveId => async dispatch => {
 
 // Removes a user from a group. Updates UI immediately. Shows banner for result
 export const leaveGroup = driveId => async dispatch => {
+  if (window.confirm('Are you sure?')) {
+    try {
+      const res = await axios.put(`/api/drives/leave/${driveId}`);
+
+      dispatch({
+        type: UPDATE_GROUP,
+        payload: {
+          driveId,
+          group: res.data,
+          join: false
+        }
+      });
+
+      dispatch(setAlert('Drive Left', 'success'));
+    } catch (err) {
+      dispatch(setAlert(err.response.statusText, 'danger'));
+      // If error, sends a DRIVE_ERROR action and msg with status code
+      dispatch({
+        type: DRIVE_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status }
+      });
+    }
+  }
+};
+
+// Add Comment, Shows banner
+export const addComment = (driveId, formData) => async dispatch => {
+  const config = {
+    header: {
+      'Content-Type': 'application/json'
+    }
+  };
+
   try {
-    const res = await axios.put(`/api/drives/leave/${driveId}`);
+    const res = await axios.post(
+      `/api/drives/comment/${driveId}`,
+      formData,
+      config
+    );
 
     dispatch({
-      type: UPDATE_GROUP,
-      payload: {
-        driveId,
-        group: res.data,
-        join: false
-      }
+      type: ADD_COMMENT,
+      payload: res.data
     });
 
-    dispatch(setAlert('Drive Left', 'success'));
+    dispatch(setAlert('Comment Added', 'success'));
   } catch (err) {
-    dispatch(setAlert(err.response.statusText, 'danger'));
+    // If error, sends a DRIVE_ERROR action and msg with status code
+    dispatch({
+      type: DRIVE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Delete Comment, Shows banner
+export const deleteComment = (driveId, commentId) => async dispatch => {
+  try {
+    await axios.delete(`/api/drives/comment/${driveId}/${commentId}`);
+
+    dispatch({
+      type: REMOVE_COMMENT,
+      payload: driveId
+    });
+
+    dispatch(setAlert('Comment Removed', 'success'));
+  } catch (err) {
     // If error, sends a DRIVE_ERROR action and msg with status code
     dispatch({
       type: DRIVE_ERROR,

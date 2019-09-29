@@ -22,6 +22,8 @@ import Posts from './components/posts/Posts';
 import Post from './components/post/Post';
 // Drives
 import Drives from './components/drives/Drives';
+import Group from './components/drive/Group';
+import Drive from './components/drive/Drive';
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -69,7 +71,8 @@ const App = () => {
               <PrivateRoute exact path="/posts" component={Posts} />
               <PrivateRoute exact path="/posts/:id" component={Post} />
               <PrivateRoute exact path="/drives" component={Drives} />
-              <PrivateRoute exact path="/drives/:id" component={Drives} />
+              <PrivateRoute exact path="/drives/:id" component={Drive} />
+              <PrivateRoute exact path="/drives/group/:id" component={Group} />
             </Switch>
           </section>
           <Footer />

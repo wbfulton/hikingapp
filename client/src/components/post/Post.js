@@ -22,6 +22,7 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
       <Link to="/posts" className="btn">
         Back To Posts
       </Link>
+      {/* Post and Post Form */}
       <PostItem post={post} showActions={false} />
       <CommentForm postId={post._id} />
       {/* Shows All Comments */}
@@ -34,15 +35,18 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
   );
 };
 
+// Defines proptypes for components
 Post.propTypes = {
   getPost: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired
 };
 
+// Sets post prop to current prop state
 const mapStateToProps = state => ({
   post: state.post
 });
 
+// Connect component to redux
 export default connect(
   mapStateToProps,
   { getPost }

@@ -34,7 +34,8 @@ const DriveItem = ({
     group,
     comments,
     date
-  }
+  },
+  showActions
 }) => {
   return (
     <div className="post bg-white p-1 my-1">
@@ -65,7 +66,7 @@ const DriveItem = ({
 
         {/* Bottom Actions */}
         {/* Only shows Join/Leave if you DO NOT own the drive */}
-        {!auth.loading && auth.user._id !== user && (
+        {!auth.loading && auth.user._id !== user && showActions && (
           <Fragment>
             <button
               type="button"
@@ -74,22 +75,33 @@ const DriveItem = ({
                 inArray(auth, group) ? leaveGroup(_id) : joinGroup(_id)
               }
             >
-              <i className="fas fa-user-plus"></i>
+              {inArray(auth, group) ? (
+                <i className="fas fa-user-minus"></i>
+              ) : (
+                <i className="fas fa-user-plus"></i>
+              )}
               {/* Displays Join if in group, else Displays Leave */}
               <span> {inArray(auth, group) ? 'Leave' : 'Join'}</span>
             </button>
           </Fragment>
         )}
-        <Link to={`/drive-group/${_id}`} className="btn btn-light">
+        <Link to={`/drives/group/${_id}`} className="btn btn-light">
           <i className="fas fa-car-alt"></i> Group{' '}
           <span className="comment-count">{group.length}</span>
         </Link>
-        <Link to={`/drive-comments/${_id}`} className="btn btn-light">
-          <i className="fas fa-comments"></i> Comments{' '}
-          {comments.length > 0 && (
-            <span className="comment-count">{comments.length}</span>
-          )}
-        </Link>
+        {showActions && (
+          <Link
+            to={`/drives/${_id}`}
+            className={
+              inArray(auth, comments) ? 'btn btn-primary' : 'btn btn-light'
+            }
+          >
+            <i className="fas fa-comments"></i> Comments{' '}
+            {comments.length > 0 && (
+              <span className="comment-count">{comments.length}</span>
+            )}
+          </Link>
+        )}
 
         {/* Delete and Edit button only shows if user owns post */}
         {!auth.loading && user === auth.user._id && (
@@ -109,6 +121,11 @@ const DriveItem = ({
       </div>
     </div>
   );
+};
+
+// Sets showActions default to true
+DriveItem.defaultProps = {
+  showActions: true
 };
 
 // Defines propTypes for DriveItem

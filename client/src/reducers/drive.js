@@ -1,9 +1,12 @@
 import {
   GET_DRIVES,
+  GET_DRIVE,
   DRIVE_ERROR,
   DELETE_DRIVE,
   ADD_DRIVE,
-  UPDATE_GROUP
+  UPDATE_GROUP,
+  ADD_COMMENT,
+  REMOVE_COMMENT
 } from '../actions/types';
 
 // Initializes the State for drives
@@ -26,7 +29,14 @@ export default function(state = initialState, action) {
         drives: payload,
         loading: false
       };
-    // Newly created post is shown first until refresh
+    // Puts specific Drive into UI
+    case GET_DRIVE:
+      return {
+        ...state,
+        drive: payload,
+        loading: false
+      };
+    // Newly created drive is shown first until refresh
     case ADD_DRIVE:
       return {
         ...state,
@@ -53,9 +63,32 @@ export default function(state = initialState, action) {
         ...state,
         drives: state.drives.map(drive =>
           drive._id === payload.driveId
-            ? { ...drive, group: payload.group, seats: payload.join ? drive.seats - 1 : drive.seats + 1}
+            ? {
+                ...drive,
+                group: payload.group,
+                seats: payload.join ? drive.seats - 1 : drive.seats + 1
+              }
             : drive
         ),
+        loading: false
+      };
+    // Adds comments for a specfic drive
+    case ADD_COMMENT:
+      return {
+        ...state,
+        drive: { ...state.drive, comments: payload },
+        loading: false
+      };
+    // Removes comments for a specfic drive
+    case REMOVE_COMMENT:
+      return {
+        ...state,
+        drive: {
+          ...state.drive,
+          comments: state.drive.comments.filter(
+            comment => comment._id !== payload
+          )
+        },
         loading: false
       };
     default:

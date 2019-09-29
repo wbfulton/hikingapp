@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import DriveItem from './DriveItem';
-import DriveForm from './DriveForm';
+import DriveForm from '../drive-forms/DriveForm';
 import { getDrives } from '../../actions/drive';
 
 // need to make a new reducer for drives
