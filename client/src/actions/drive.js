@@ -218,7 +218,7 @@ export const deleteComment = (driveId, commentId) => async dispatch => {
 
     dispatch({
       type: REMOVE_COMMENT,
-      payload: driveId
+      payload: commentId
     });
 
     dispatch(setAlert('Comment Removed', 'success'));
