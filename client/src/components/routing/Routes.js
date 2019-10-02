@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 
 // Layout
@@ -10,6 +10,8 @@ import Register from '../auth/Register';
 import Login from '../auth/Login';
 // Dashboard
 import Dashboard from '../dashboard/Dashboard';
+// Layout
+import About from './components/layout/About';
 // Profile
 import CreateProfile from '../profile-forms/CreateProfile';
 import EditProfile from '../profile-forms/EditProfile';
@@ -28,6 +30,7 @@ const Routes = () => {
     <section className="container">
       <Alert />
       <Switch>
+        <Route exact path="/about" component={About} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <PrivateRoute exact path="/profiles" component={Profiles} />

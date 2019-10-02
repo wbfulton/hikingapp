@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Landing from './components/layout/Landing';
-import About from './components/layout/About';
 
 // All Routes
 import Routes from './components/routing/Routes';
@@ -35,7 +34,6 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route exact path="/" component={Landing} />
-            <Route exact path="/about" component={About} />
             {/* All Routes */}
             <Route component={Routes} />
           </Switch>
