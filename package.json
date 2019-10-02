@@ -1,8 +1,8 @@
 {
   "name": "rideshare",
   "version": "1.0.0",
-  "engines" : {
-    "node" : "10.16.0"
+  "engines": {
+    "node": "10.16.0"
   },
   "description": "rideshare Web App",
   "main": "server.js",
