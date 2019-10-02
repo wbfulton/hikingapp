@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  messenger: {
+  phone: {
     type: String,
     required: true
   },

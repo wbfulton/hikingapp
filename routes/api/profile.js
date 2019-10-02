@@ -40,8 +40,7 @@ router.get('/', async (req, res) => {
     // adds name and avatar from user collection
     const profiles = await Profile.find().populate('user', [
       'name',
-      'avatar',
-      'messenger'
+      'avatar'
     ]);
     res.json(profiles);
   } catch (err) {

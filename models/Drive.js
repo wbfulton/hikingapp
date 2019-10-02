@@ -49,7 +49,7 @@ const DriveSchema = new Schema({
       avatar: {
         type: String
       },
-      messenger: {
+      phone: {
         type: String,
         required: true
       },

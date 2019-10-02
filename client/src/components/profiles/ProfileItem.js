@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const ProfileItem = ({
   profile: {
-    user: { _id, name, avatar, messenger },
+    user: { _id, name, avatar },
     type,
     grade,
     skills,
@@ -22,9 +22,6 @@ const ProfileItem = ({
         <Link to={`/profile/${_id}`} className="btn btn-primary">
           View Profile
         </Link>
-        <a href={`https://${messenger}`} className="btn btn-primary">
-            Message
-        </a>
       </div>
       {/* Maps thorugh skills to display all skills */}
       <ul>

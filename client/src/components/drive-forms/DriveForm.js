@@ -112,7 +112,7 @@ const DriveForm = ({ addDrive }) => {
                 rows="5"
                 value={description}
                 onChange={e => onChange(e)}
-                placeholder="* What time are you leaving? Where will you pick your riders up? Any specifications?"
+                placeholder="* Where will you pick your riders up? Any specifications?"
                 required
               ></textarea>
             </div>

@@ -11,12 +11,12 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    messenger: '',
+    phone: '',
     password: '',
     password2: ''
   });
 
-  const { name, email, messenger, password, password2 } = formData;
+  const { name, email, phone, password, password2 } = formData;
 
   // updates state of form object
   const onChange = e =>
@@ -30,7 +30,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
     } else {
-      register({ name, email, messenger, password });
+      register({ name, email, phone, password });
     }
   };
 
@@ -75,15 +75,14 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
         <div className="form-group">
           <input
             type="text"
-            placeholder="FB Messenger Link"
-            name="messenger"
-            value={messenger}
+            placeholder="Phone Number"
+            name="phone"
+            value={phone}
             onChange={e => onChange(e)}
             required
           />
           <small className="form-text">
-            Please enter your facebook messenger link. Found in messenger
-            profile. Click create username. Click copy link
+            Format 408-123-1234. Number is so driver can contact you
           </small>
         </div>
         <div className="form-group">

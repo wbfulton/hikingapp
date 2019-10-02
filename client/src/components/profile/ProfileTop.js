@@ -7,7 +7,7 @@ const ProfileTop = ({
     type,
     driver,
     social,
-    user: { name, avatar, messenger }
+    user: { name, avatar }
   }
 }) => {
   return (
@@ -39,9 +39,6 @@ const ProfileTop = ({
           </a>
         )}
       </div>
-      <a href={`https://${messenger}`} className="btn btn-light">
-        Message
-      </a>
     </div>
   );
 };

@@ -27,17 +27,10 @@ router.post(
       .not()
       .isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
-    check('messenger', 'Messenger link is required')
+    check('phone', 'Please include a valid phone number')
       .not()
       .isEmpty()
-      .custom(messenger => {
-        // Checks messenger link
-        if (!messenger.includes('m.me/')) {
-          throw new Error('Invalid Messenger Link');
-        }
-
-        return true;
-      }),
+      .isMobilePhone(),
     check(
       'password',
       'Please enter a password with more than 6 characters'
@@ -50,7 +43,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, email, messenger, password } = req.body; // pull variables out
+    const { name, email, phone, password } = req.body; // pull variables out
 
     try {
       // Sees if user exists
@@ -73,7 +66,7 @@ router.post(
       user = new User({
         name,
         email,
-        messenger,
+        phone,
         avatar,
         password
       });

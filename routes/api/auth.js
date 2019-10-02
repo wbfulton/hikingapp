@@ -29,7 +29,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // @route  POST api/auth
-// @desc   Authenticate user and get token (login). Returns jsonwebtoken with
+// @desc   Login/Authenticate user and get token (login). Returns jsonwebtoken with
 //         User data in the payload
 // @access Public
 router.post(

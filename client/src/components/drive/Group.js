@@ -27,7 +27,7 @@ const Group = ({ getDrive, drive: { drive, loading }, match }) => {
       {/* Maps thorugh and Displays all group members*/}
       <div className="comments">
         {drive.group.map(member => (
-          <GroupItem key={member._id} member={member} driveId={drive._id}/>
+          <GroupItem key={member._id} member={member} driveOwner={drive.user}/>
         ))}
       </div>
     </Fragment>

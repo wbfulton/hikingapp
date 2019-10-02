@@ -48,7 +48,7 @@ const DriveItem = ({
       </div>
       <div>
         {/* Top Descriptions */}
-        <div className="post-category">
+        <span className="post-category">
           <i className="far fa-calendar-alt text-primary"></i>
           <span>
             {' '}
@@ -56,13 +56,13 @@ const DriveItem = ({
           </span>
           <i className="far fa-clock text-primary"></i>
           <span> {leavingTime} </span>
-        </div>
-        <div className="post-category">
+        </span>
+        <span className="post-category">
           <i className="fas fa-mountain text-primary"></i>
           <span> {resort} </span>
           <i className="fas fa-chair text-primary"></i>
           <span> {seats} </span>
-        </div>
+        </span>
         <p className="my-1">{description}</p>
         <p className="post-date">
           Posted on <Moment format="MM/DD/YY">{date}</Moment>
@@ -90,7 +90,7 @@ const DriveItem = ({
           </Fragment>
         )}
         <Link to={`/drives/group/${_id}`} className="btn btn-light">
-          <i className="fas fa-car-alt" /> <div className="hide-sm">Group </div>
+          <i className="fas fa-car-alt" /> <span className="hide-sm">Group </span>
           <span className="comment-count">{group.length}</span>
         </Link>
         {showActions && (
@@ -101,7 +101,7 @@ const DriveItem = ({
             }
           >
             <i className="fas fa-comments" />{' '}
-            <div className="hide-sm">Comments </div>
+            <span className="hide-sm">Comments </span>
             {comments.length > 0 && (
               <span className="comment-count">{comments.length}</span>
             )}

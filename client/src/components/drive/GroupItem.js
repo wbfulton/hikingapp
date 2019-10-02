@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 // Very similar to ProfileItem but different props
 const GroupItem = ({
   auth,
-  member: { name, avatar, messenger, skills, grade, user, type }
+  member: { name, avatar, phone, skills, grade, user, type },
+  driveOwner
 }) => {
   return (
     <div className="profile bg-light">
@@ -19,11 +20,11 @@ const GroupItem = ({
         <Link to={`/profile/${user}`} className="btn btn-primary">
           View Profile
         </Link>
-        {/* Only shows message for users not yourself */}
-        {!auth.loading && user !== auth.user._id && (
-          <a href={`https://${messenger}`} className="btn btn-primary">
-            Message
-          </a>
+        {/* Only shows numbers IF YOU OWN THE DRIVE. Doesn't show your own number*/}
+        {!auth.loading && user !== auth.user._id && auth.user._id === driveOwner && (
+          <span className="btn btn-primary">
+            {phone.substring(0, 3) + '-' + phone.substring(3, 6) + '-' + phone.substring(6)}
+          </span>
         )}
       </div>
       {/* Maps thorugh skills to display all skills */}
@@ -41,7 +42,8 @@ const GroupItem = ({
 // Defines props for component
 GroupItem.propTypes = {
   member: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  driveOwner: PropTypes.object.isRequired
 };
 
 // Sets auth prop to the current auth state

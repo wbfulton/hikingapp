@@ -146,7 +146,7 @@ router.post(
             // initialzies group array with the driver
             user: req.user.id,
             name: user.name,
-            messenger: user.messenger,
+            phone: user.phone,
             avatar: user.avatar,
             grade: profile.grade,
             type: profile.type,
@@ -337,7 +337,7 @@ router.put('/join/:id', auth, async (req, res) => {
     const joinFields = {};
     joinFields.user = user.id;
     joinFields.name = user.name;
-    joinFields.messenger = user.messenger;
+    joinFields.phone = user.phone;
     joinFields.avatar = user.avatar;
     if (profile) {
       if (profile.grade) joinFields.grade = profile.grade;

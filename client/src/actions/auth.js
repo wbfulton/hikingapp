@@ -38,7 +38,7 @@ export const loadUser = () => async dispatch => {
 export const register = ({
   name,
   email,
-  messenger,
+  phone,
   password
 }) => async dispatch => {
   // sets header for message
@@ -51,7 +51,7 @@ export const register = ({
   const body = {
     name,
     email,
-    messenger,
+    phone,
     password
   };
 
