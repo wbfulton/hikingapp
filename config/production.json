@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://wbfulton:will@snowclub-c7sek.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "denali"
+ }
