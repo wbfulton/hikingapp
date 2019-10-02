@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createProfile, getCurrentProfile } from '../../actions/profile';
 
@@ -10,7 +10,7 @@ const EditProfile = ({
   getCurrentProfile,
   history
 }) => {
-  // sets FormData and setFrom Data to these initial states
+  // sets FormData and setForm Data to these initial states
   const [formData, setFormData] = useState({
     grade: '',
     type: '',

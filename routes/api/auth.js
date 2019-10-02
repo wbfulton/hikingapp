@@ -1,8 +1,10 @@
-const express = require('express'); // imports express
-const router = express.Router(); // creates router
+// require('resource') imports resource
+
+const express = require('express');
+const router = express.Router();
 
 // Import password encryption
-const bcrypt = require('bcryptjs'); // imports bcryptjs
+const bcrypt = require('bcryptjs');
 
 // Import Validation and Authentication
 const auth = require('../../middleware/auth'); // imports custom auth method

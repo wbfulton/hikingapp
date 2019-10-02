@@ -9,10 +9,12 @@ connectDB();
 // Init Middleware
 app.use(express.json({ extended: false }));
 
+/*
 // Get Route for Testing
 app.get('/', (req, res, next) => {
     res.send('API Running');
 })
+*/
 
 // Routing
 app.use('/api/auth', require('./routes/api/auth'));
@@ -26,5 +28,5 @@ const PORT = process.env.PORT || 5000;
 
 // Starts server
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
-})
+  console.log(`Server listening on port ${PORT}`);
+});

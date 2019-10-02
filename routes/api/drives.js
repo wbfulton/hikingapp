@@ -10,7 +10,7 @@ const User = require('../../models/User');
 const Profile = require('../../models/Profile');
 const Drive = require('../../models/Drive');
 
-// @route  Get api/drives
+// @route  GET api/drives
 // @desc   Returns all filtered drives, filters expired drives and full drives
 // @access Private
 router.get('/', auth, async (req, res) => {
@@ -27,7 +27,7 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// @route  Get api/drives/:id
+// @route  GET api/drives/:id
 // @desc   Returns a drive by ID
 // @access Private
 router.get('/:id', auth, async (req, res) => {
@@ -89,7 +89,7 @@ router.post(
           const y = curr.getFullYear();
 
           // Checks format of input date
-          if (date.length !== 3 || leavingDate.length !== 10) {
+          if (!date || date.length !== 3 || leavingDate.length !== 10) {
             throw new Error('Invalid Date, Check Zeroes');
           }
 
@@ -97,7 +97,7 @@ router.post(
           if (
             (date[0] < m && date[2] == y) ||
             (date[0] <= m && date[1] < d && date[2] == y) ||
-            date[2] < y ||
+            date[2] < y  ||
             date[0] > 12 ||
             date[1] > 31 ||
             date[1] <= 0
@@ -246,9 +246,9 @@ router.put(
       // sets all drive fields to variables
       const { leavingDate, leavingTime, resort, seats, description } = req.body;
 
-      // Checks if new seats hold users already signed up for drive
-      if (seats < drive.group.length) {
-        return res.status(400).json({ msg: 'Current group needs more seats' });
+      // Seats can not be less than 0
+      if (seats < 0) {
+        return res.status(400).json({ msg: 'Enter positive number of seats' });
       }
 
       // all fields are required

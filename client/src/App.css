@@ -348,7 +348,6 @@ button {
   position: relative;
   background: url('./img/about.jpg') no-repeat center center/cover;
   height: 100vh;
-  margin-bottom: -150px;
 }
 
 .about-inner {
@@ -392,7 +391,6 @@ footer p {
   position: flex;
   background: url('./img/showcase.jpg') no-repeat center center/cover;
   height: 100vh;
-  margin-bottom: -150px;
 }
 
 .landing-inner {

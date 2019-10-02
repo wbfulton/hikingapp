@@ -106,7 +106,7 @@ const DriveItem = ({
         {/* Delete and Edit button only shows if user owns post */}
         {!auth.loading && user === auth.user._id && (
           <Fragment>
-            <Link to={`/drive-edit/${_id}`}>
+            <Link to={`/edit-drive/${_id}`}>
               <button className="btn btn-primary">Edit</button>
             </Link>
             <button

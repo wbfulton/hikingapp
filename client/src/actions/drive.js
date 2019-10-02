@@ -88,12 +88,53 @@ export const deleteDrive = id => async dispatch => {
   }
 };
 
+// Edits a drive. Input date must be correct format and a future date. Shows banner for result
+export const editDrive = (id, formData, history) => async dispatch => {
+  try {
+    const config = {
+      header: {
+        'Content-Type': 'application/json'
+      }
+    };
+    const res = await axios.put(`/api/drives/${id}`, formData, config);
+
+    dispatch({
+      type: GET_DRIVE,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Drive Edited', 'success'));
+
+    // Redirect to dashboard after making or editing profile
+    history.push('/dashboard');
+
+  } catch (err) {
+    // Creates alerts for missing required fields
+    const errors = err.response.data.errors;
+    console.log(err);
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+    }
+
+    // If error, sends a DRIVE_ERROR action and msg with status code
+    dispatch({
+      type: DRIVE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+
+    //dispatch(setAlert(errors, 'danger'))
+  }
+};
+
 // Adds a drive. Input date must be correct format and a future date. Shows banner for result
 export const addDrive = formData => async dispatch => {
-  const config = {
-    'Content-Type': 'application.json'
-  };
   try {
+    const config = {
+      header: {
+        'Content-Type': 'application/json'
+      }
+    };
+
     const res = await axios.post('/api/drives', formData, config);
 
     dispatch({

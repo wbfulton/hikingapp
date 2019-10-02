@@ -1,18 +1,20 @@
-const express = require('express'); // imports express
-const router = express.Router(); // creates router
+// require('resource') imports resource
+
+const express = require('express');
+const router = express.Router();
 
 // Import password encryption
-const bcrypt = require('bcryptjs'); // imports bcryptjs
+const bcrypt = require('bcryptjs');
 
 // Import Gravatar for profile
-const gravatar = require('gravatar'); // imports gravatar
+const gravatar = require('gravatar');
 
 // Import Validation and Authentication
-const { check, validationResult } = require('express-validator'); // for validation
-const jwt = require('jsonwebtoken'); // imports jwt
-const config = require('config'); // imports config file
+const { check, validationResult } = require('express-validator');
+const jwt = require('jsonwebtoken');
+const config = require('config');
 
-const User = require('../../models/User'); // mongoose User model
+const User = require('../../models/User');
 
 // @route  POST api/users
 // @desc   Register user (register). Returns jsonwebtoken with user payload
