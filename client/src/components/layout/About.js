@@ -10,8 +10,8 @@ const About = () => {
           <div className="m">
             <h3 className="text-primary">Who are We?</h3>
             <p className="text-center">
-              We are a student led organization at the University of Washington
-              - Seattle campus.
+              We are rideshare organizer through a student built web application
+              at the University of Washington (Seattle).
             </p>
             <div className="line"></div>
           </div>
@@ -21,12 +21,10 @@ const About = () => {
             <p className="text-center m">
               Our purpose is to create a thriving community of snowboarders and
               skiers alike that share a love for the mountains and all things
-              snow! Husky Snow Club is set up as a ride-share network for
-              students at the University of Washington. We pair up team members
-              in groups of 3 or more to go to local mountains through our
-              Facebook page. To support these groups we reimburse the drivers
-              for their gas money making it free for members to find a way to
-              the mountain!
+              snow! UW Rideshare is set up as a ride-share program currently for
+              all who want to sign up. Once you register, you can instantly join
+              drives, make posts, and create your profile! We strive to connect
+              people through shared experiences and can't wait to see you out there!
             </p>
             <div className="line"></div>
           </div>
@@ -34,16 +32,11 @@ const About = () => {
           <div className="m">
             <h3 className="text-primary">How much does it cost?</h3>
             <p className="text-center">
-              The membership fee is 30 dollars which can be paid through Venmo
-              to huskysnowclub.
+              Its FREE!!
             </p>
-            <h3 className="text-primary">How do I contact the club?</h3>
+            <h3 className="text-primary">How do I contact the admin?</h3>
             <p className="text-center">
-              Message one of our officers, call us at 408-523-1234, or contact
-              us on our{' '}
-              <a href="https://www.facebook.com/pg/huskysnowclub/">
-                facebook page!
-              </a>
+              Message us through <a href="m.me/wbfulton">Messenger!</a>
             </p>
             <div className="line"></div>
           </div>
