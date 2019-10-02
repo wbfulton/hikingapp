@@ -1,9 +1,8 @@
 // imports the actions that we will be creating
-import { SET_ALERT, REMOVE_ALERT } from '../actions/types';
-const initialState = [];
+import { SET_ALERT, REMOVE_ALERT } from '../actions/types.js';
 
 // Updates State According to the Action passed in
-export default function(state = initialState, action) {
+export default function(state = [], action) {
   const { type, payload } = action;
 
   switch (type) {

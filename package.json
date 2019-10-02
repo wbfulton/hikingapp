@@ -1,7 +1,10 @@
 {
-  "name": "snowclub",
+  "name": "rideshare",
   "version": "1.0.0",
-  "description": "SnowClub Web App",
+  "engines" : {
+    "node" : "10.16.0"
+  },
+  "description": "rideshare Web App",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
