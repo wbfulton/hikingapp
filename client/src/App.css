@@ -345,7 +345,7 @@ button {
 
 /* About Page */
 .about {
-  position: relative;
+  position: flex;
   background: url('./img/about.jpg') no-repeat center center/cover;
   height: 100vh;
 }
