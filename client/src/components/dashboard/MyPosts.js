@@ -16,7 +16,7 @@ const Posts = ({ getMyPosts, post: { posts, loading } }) => {
     <Spinner />
   ) : (
     <Fragment>
-      <p className="large lead text-primary p-1">My Posts</p>
+      <p className="large lead text-dark p-1">My Posts</p>
       {posts.length > 0 ? (
         <Fragment> {/* Displays All Users Posts */}
           <div className="posts">

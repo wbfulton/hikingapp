@@ -48,17 +48,21 @@ const DriveItem = ({
       </div>
       <div>
         {/* Top Descriptions */}
-        <i className="far fa-calendar-alt text-primary"></i>
-        <span>
-          {' '}
-          Leaving <Moment format="MM/DD/YYYY">{leavingDate}</Moment>{' '}
-        </span>
-        <i className="far fa-clock text-primary"></i>
-        <span> {leavingTime} </span>
-        <i className="fas fa-mountain text-primary"></i>
-        <span> {resort} </span>
-        <i className="fas fa-chair text-primary"></i>
-        <span> {seats} </span>
+        <div className="post-category">
+          <i className="far fa-calendar-alt text-primary"></i>
+          <span>
+            {' '}
+            Leaving <Moment format="MM/DD/YYYY">{leavingDate}</Moment>{' '}
+          </span>
+          <i className="far fa-clock text-primary"></i>
+          <span> {leavingTime} </span>
+        </div>
+        <div className="post-category">
+          <i className="fas fa-mountain text-primary"></i>
+          <span> {resort} </span>
+          <i className="fas fa-chair text-primary"></i>
+          <span> {seats} </span>
+        </div>
         <p className="my-1">{description}</p>
         <p className="post-date">
           Posted on <Moment format="MM/DD/YY">{date}</Moment>
@@ -86,7 +90,7 @@ const DriveItem = ({
           </Fragment>
         )}
         <Link to={`/drives/group/${_id}`} className="btn btn-light">
-          <i className="fas fa-car-alt"></i> Group{' '}
+          <i className="fas fa-car-alt" /> <div className="hide-sm">Group </div>
           <span className="comment-count">{group.length}</span>
         </Link>
         {showActions && (
@@ -96,7 +100,8 @@ const DriveItem = ({
               inArray(auth, comments) ? 'btn btn-primary' : 'btn btn-light'
             }
           >
-            <i className="fas fa-comments"></i> Comments{' '}
+            <i className="fas fa-comments" />{' '}
+            <div className="hide-sm">Comments </div>
             {comments.length > 0 && (
               <span className="comment-count">{comments.length}</span>
             )}

@@ -16,7 +16,7 @@ const Drives = ({ getMyDrives, drive: { drives, loading } }) => {
     <Spinner />
   ) : (
     <Fragment>
-      <p className="large lead text-primary p-1">My Drives</p>
+      <p className="large lead text-dark p-1">My Drives</p>
       {drives.length > 0 ? (
         <Fragment>
           <div className="posts"> {/* Displays all Users Drives */}

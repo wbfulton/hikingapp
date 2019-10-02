@@ -604,10 +604,7 @@ footer p {
   .profile-grid {
     grid-template-areas:
       'top'
-      'about'
-      'exp'
-      'edu'
-      'github';
+      'about';
   }
 
   .profile-about .skills {
@@ -626,5 +623,11 @@ footer p {
   .post a,
   .post button {
     padding: 0.3rem 0.4rem;
+  }
+
+  .post-category {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.2rem;
   }
 }
