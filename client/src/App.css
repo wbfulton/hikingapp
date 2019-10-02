@@ -355,11 +355,14 @@ button {
   height: 100%;
   width: 80%;
   margin: auto;
-  display: flex;
+  display: relative;
+  overflow: scroll;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 
 /* Footer */
