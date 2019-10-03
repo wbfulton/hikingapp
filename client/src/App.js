@@ -38,7 +38,7 @@ const App = () => {
             {/* All Routes */}
             <Route component={Routes} />
           </Switch>
-          {/*<Footer /> */ }
+          {/* Uncomment for a Footer <Footer /> */}
         </Fragment>
       </Router>
     </Provider>
