@@ -110,7 +110,7 @@ router.post(
       check('leavingTime', 'Time is required')
         .not()
         .isEmpty(),
-      check('resort', 'Resort is required')
+      check('hike', 'Hike is required')
         .not()
         .isEmpty(),
       check('seats', 'Seats are required')
@@ -138,7 +138,7 @@ router.post(
         avatar: user.avatar,
         leavingDate: req.body.leavingDate,
         leavingTime: req.body.leavingTime,
-        resort: req.body.resort,
+        hike: req.body.hike,
         seats: req.body.seats,
         description: req.body.description,
         group: [
@@ -150,6 +150,7 @@ router.post(
             avatar: user.avatar,
             grade: profile.grade,
             type: profile.type,
+            exp: profile.exp,
             skills: profile.skills
           }
         ]
@@ -212,7 +213,7 @@ router.put(
       check('leavingTime', 'Time is required')
         .not()
         .isEmpty(),
-      check('resort', 'Resort is required')
+      check('hike', 'hike is required')
         .not()
         .isEmpty(),
       check('seats', 'Seats are required')
@@ -244,7 +245,7 @@ router.put(
       }
 
       // sets all drive fields to variables
-      const { leavingDate, leavingTime, resort, seats, description } = req.body;
+      const { leavingDate, leavingTime, hike, seats, description } = req.body;
 
       // Seats can not be less than 0
       if (seats < 0) {
@@ -257,7 +258,7 @@ router.put(
       driveFields.avatar = user.avatar;
       driveFields.leavingDate = leavingDate;
       driveFields.leavingTime = leavingTime;
-      driveFields.resort = resort;
+      driveFields.hike = hike;
       driveFields.seats = seats;
       driveFields.description = description;
 
@@ -342,6 +343,7 @@ router.put('/join/:id', auth, async (req, res) => {
     if (profile) {
       if (profile.grade) joinFields.grade = profile.grade;
       if (profile.type) joinFields.type = profile.type;
+      if (profile.exp) joinFields.exp = profile.exp;
       if (profile.skills) joinFields.skills = profile.skills;
     } else {
       return res.status(400).json({ msg: 'You need a profile to join drives'})

@@ -14,9 +14,10 @@ const EditProfile = ({
   const [formData, setFormData] = useState({
     grade: '',
     type: '',
+    exp: '',
     skills: '',
-    resort: '',
-    pass: '',
+    hike: '',
+    passes: '',
     bio: '',
     driver: '',
     facebook: '',
@@ -34,9 +35,10 @@ const EditProfile = ({
     setFormData({
       grade: loading || !profile.grade ? '' : profile.grade,
       type: loading || !profile.type ? '' : profile.type,
+      exp: loading || !profile.exp ? '' : profile.exp,
       skills: loading || !profile.skills ? '' : profile.skills.join(),
-      resort: loading || !profile.resort ? '' : profile.resort,
-      pass: loading || !profile.pass ? '' : profile.pass,
+      hike: loading || !profile.hike ? '' : profile.hike,
+      passes: loading || !profile.passes ? '' : profile.passes.join(),
       bio: loading || !profile.bio ? '' : profile.bio,
       driver: loading || !profile.driver ? '' : profile.driver,
       facebook: loading || !profile.social ? '' : profile.social.facebook,
@@ -49,9 +51,10 @@ const EditProfile = ({
   const {
     grade,
     type,
+    exp,
     skills,
-    resort,
-    pass,
+    hike,
+    passes,
     bio,
     driver,
     facebook,
@@ -84,6 +87,7 @@ const EditProfile = ({
       {/* Form */}
       <form className="form" onSubmit={e => onSubmit(e)}>
         {/* Grade */}
+        {/* Grade Selector */}
         <div className="form-group">
           <select name="grade" value={grade} onChange={e => onChange(e)}>
             <option value="0">Select Grade</option>
@@ -97,19 +101,34 @@ const EditProfile = ({
             Give us an idea of where you are at UW
           </small>
         </div>
-        {/* Type */}
+        {/* Hiker Type Selector */}
         <div className="form-group">
           <select name="type" value={type} onChange={e => onChange(e)}>
             <option value="0">* Select Type</option>
-            <option value="Skier">Skier</option>
-            <option value="Snowboarder">Snowboarder</option>
-            <option value="Skier and Snowboarder">Skier and Snowboarder</option>
+            <option value="Hiker">Hiker</option>
+            <option value="Backpacker">Backpacker</option>
+            <option value="Hiker and Backpacker">Hiker and Backpacker</option>
           </select>
           <small className="form-text">
-            * Let us know how you shred the mountain
+            * Let us know how you enjoy the outdoors
           </small>
         </div>
-        {/* Type */}
+        {/* Exp Selector */}
+        <div className="form-group">
+          <input
+            type="number"
+            placeholder="Years Experience"
+            name="exp"
+            value={parseInt(exp.substring(0, 1))}
+            onChange={e => onChange(e)}
+            min="0"
+            required
+          />
+          <small className="form-text">
+            * How many years of hiking experience do you have?
+          </small>
+        </div>
+        {/* Driver Selector */}
         <div className="form-group">
           <div className="form-group">
             <select name="driver" value={driver} onChange={e => onChange(e)}>
@@ -118,30 +137,33 @@ const EditProfile = ({
               <option value={false}>No</option>
             </select>
             <small className="form-text">
-              * Let us know if you can haul ski bums
+              * Let us know if you can haul members
             </small>
           </div>
-          <input
-            type="text"
-            placeholder="Resort"
-            name="resort"
-            value={resort}
-            onChange={e => onChange(e)}
-          />
-          <small className="form-text">What is your favorite resort?</small>
         </div>
-        {/* Ski Pass */}
+        {/* Hike Input */}
         <div className="form-group">
           <input
             type="text"
-            placeholder="Ski Pass"
-            name="pass"
-            value={pass}
+            placeholder="Hike"
+            name="hike"
+            value={hike}
+            onChange={e => onChange(e)}
+          />
+          <small className="form-text">What is your favorite hike?</small>
+        </div>
+        {/* Outdoor Pass Input */}
+        <div className="form-group">
+          <input
+            type="text"
+            placeholder="Outdoor Passes"
+            name="passes"
+            value={passes}
             onChange={e => onChange(e)}
           />
           <small className="form-text">
-            What ski pass do you have? (Type 'No Ski Pass' if you do not have
-            one)
+            What outdoor passes do you have? Please enter comma seperated values
+            (e.g. Discovery, Fishing ) Leave empty if you dont have any
           </small>
         </div>
         {/* Skills */}
@@ -154,8 +176,8 @@ const EditProfile = ({
             onChange={e => onChange(e)}
           />
           <small className="form-text">
-            * Please use comma separated values (eg. Trees, Cliff Jumping,
-            Sendin' It )
+            * Please use comma separated values (eg. Bouldering, Camping,
+            Wayfinding )
           </small>
         </div>
         {/* Bio */}

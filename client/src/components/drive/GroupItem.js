@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 // Very similar to ProfileItem but different props
 const GroupItem = ({
   auth,
-  member: { name, avatar, phone, skills, grade, user, type },
+  member: { name, avatar, phone, skills, grade, user, exp, type },
   driveOwner
 }) => {
   return (
@@ -16,16 +16,17 @@ const GroupItem = ({
         <h2>{name}</h2>
         <p>{type}</p>
         <p className="my-1">{grade !== '0' && <span>{grade}</span>}</p>
+        <p className="my-1">{exp !== '0' && <span>{exp}</span>}</p>
 
         <Link to={`/profile/${user}`} className="btn btn-primary">
           View Profile
         </Link>
         {/* Only shows numbers IF YOU OWN THE DRIVE. Doesn't show your own number*/}
-        {!auth.loading && user !== auth.user._id && auth.user._id === driveOwner && (
-          <span className="btn btn-primary my">
-            {phone}
-          </span>
-        )}
+        {!auth.loading &&
+          user !== auth.user._id &&
+          auth.user._id === driveOwner && (
+            <span className="btn btn-primary my">{phone}</span>
+          )}
       </div>
       {/* Maps thorugh skills to display all skills */}
       <ul>
@@ -52,6 +53,4 @@ const mapStateToProps = state => ({
 });
 
 // Connects component with redux
-export default connect(
-  mapStateToProps,
-)(GroupItem);
+export default connect(mapStateToProps)(GroupItem);

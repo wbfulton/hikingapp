@@ -28,7 +28,7 @@ const DriveItem = ({
     avatar,
     leavingDate,
     leavingTime,
-    resort,
+    hike,
     seats,
     description,
     group,
@@ -59,7 +59,7 @@ const DriveItem = ({
         </span>
         <span className="post-category">
           <i className="fas fa-mountain text-primary"></i>
-          <span> {resort} </span>
+          <span> {hike} </span>
           <i className="fas fa-chair text-primary"></i>
           <span> {seats} </span>
         </span>

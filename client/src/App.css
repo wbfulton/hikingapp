@@ -1,6 +1,6 @@
 /* Global Styles */
 :root {
-  --primary-color: #17a2b8;
+  --primary-color: #4A7628;
   --dark-color: #343a40;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
@@ -237,7 +237,7 @@ img {
 
 /* Overlay */
 .dark-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.6);
   position: absolute;
   top: 0;
   left: 0;
@@ -361,7 +361,7 @@ button {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding-top: 100px;
+  padding-top: 150px;
   padding-bottom: 100px;
 }
 
@@ -564,7 +564,7 @@ footer p {
   }
 
   .lead {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 
   /* Navbar */
@@ -630,6 +630,7 @@ footer p {
 
   .post-category {
     display: block;
+    text-align: center;
     width: 100%;
     margin-bottom: 0.2rem;
   }

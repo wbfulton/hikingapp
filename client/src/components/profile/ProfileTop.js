@@ -5,6 +5,7 @@ const ProfileTop = ({
   profile: {
     grade,
     type,
+    exp,
     driver,
     social,
     user: { name, avatar }
@@ -21,6 +22,8 @@ const ProfileTop = ({
       <p className="lead">{type}</p>
       {/* Only shows if they put it in profile */}
       <p className="lead">{grade !== '0' && <span>{grade}</span>}</p>
+      {/* Only shows if they put it in profile */}
+      <p className="lead">{exp !== '0' && <span>{exp}</span>}</p>
       {/* Shows all social media links inputed */}
       <div className="icons my-1">
         {social && social.twitter && (

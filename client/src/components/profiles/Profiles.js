@@ -12,22 +12,29 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   }, [getProfiles]);
 
   // Shows spinner when loading
-  return <Fragment>
-      { loading ? 
-        <Spinner /> : <Fragment>
+  return (
+    <Fragment>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <Fragment>
           <h1 className="large text-primary">Members</h1>
           <p className="lead">
-            <i className="far fa-address-book"></i> Connect with fellow skiers!
+            <i className="far fa-address-book"></i> Connect with fellow hikers!
           </p>
           <div className="profiles">
-             { profiles.length > 0 ? (
-                 profiles.map(profile => (
-                     <ProfileItem key={profile._id} profile={profile} />
-                 ))
-             ) : <h4>No profiles found...</h4>} 
+            {profiles.length > 0 ? (
+              profiles.map(profile => (
+                <ProfileItem key={profile._id} profile={profile} />
+              ))
+            ) : (
+              <h4>No profiles found...</h4>
+            )}
           </div>
-        </Fragment> }
+        </Fragment>
+      )}
     </Fragment>
+  );
 };
 
 // Defines prop types for component

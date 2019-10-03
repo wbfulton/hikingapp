@@ -18,7 +18,7 @@ const DriveSchema = new Schema({
     type: String,
     required: true
   },
-  resort: {
+  hike: {
     type: String,
     required: true
   },
@@ -57,6 +57,9 @@ const DriveSchema = new Schema({
         type: String
       },
       type: {
+        type: String
+      },
+      exp: {
         type: String
       },
       skills: {

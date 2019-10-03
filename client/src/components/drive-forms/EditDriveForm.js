@@ -4,16 +4,12 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { editDrive } from '../../actions/drive';
 
-const EditDriveForm = ({
-  editDrive,
-  drive,
-  history,
-}) => {
+const EditDriveForm = ({ editDrive, drive, history }) => {
   // Sets FormData and setForm Data to these initial states
   const [formData, setFormData] = useState({
     leavingDate: '',
     leavingTime: '',
-    resort: '',
+    hike: '',
     seats: '',
     description: ''
   });
@@ -33,16 +29,16 @@ const EditDriveForm = ({
   }
   // Runs every time component refreshes, Fills in form with current fields
   useEffect(() => {
-      setFormData({
-        leavingDate: !drive.leavingDate ? '' : formatDate(drive.leavingDate),
-        leavingTime: !drive.leavingTime ? '' : drive.leavingTime,
-        resort:  !drive.resort ? '' : drive.resort,
-        seats: !drive.seats ? '' : drive.seats,
-        description: !drive.description ? '' : drive.description
-      });
+    setFormData({
+      leavingDate: !drive.leavingDate ? '' : formatDate(drive.leavingDate),
+      leavingTime: !drive.leavingTime ? '' : drive.leavingTime,
+      hike: !drive.hike ? '' : drive.hike,
+      seats: !drive.seats ? '' : drive.seats,
+      description: !drive.description ? '' : drive.description
+    });
   }, [drive]);
 
-  const { leavingDate, leavingTime, resort, seats, description } = formData;
+  const { leavingDate, leavingTime, hike, seats, description } = formData;
 
   // Updates state of form data each time a field changes
   const onChange = e =>
@@ -88,14 +84,14 @@ const EditDriveForm = ({
             * What time are you leaving? (e.g. 09:00 AM){' '}
           </small>
         </div>
-        {/* Resort */}
+        {/* Hike */}
         <div className="form-group">
           <input
             type="text"
-            value={resort}
+            value={hike}
             onChange={e => onChange(e)}
-            placeholder="Resort"
-            name="resort"
+            placeholder="Hike"
+            name="hike"
             required
           />
           <small className="form-text">* Where are you going?</small>
@@ -113,7 +109,9 @@ const EditDriveForm = ({
             required
           />
           <small className="form-text">
-            * How many seats do you have? (NOT including yourself and NOT including those signed up). Enter zero if you have no seats avaliable.
+            * How many seats do you have? (NOT including yourself and NOT
+            including those signed up). Enter zero if you have no seats
+            avaliable.
           </small>
         </div>
         {/* Description */}

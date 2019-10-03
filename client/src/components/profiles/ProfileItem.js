@@ -5,6 +5,7 @@ const ProfileItem = ({
   profile: {
     user: { _id, name, avatar },
     type,
+    exp,
     grade,
     skills,
     driver
@@ -15,10 +16,13 @@ const ProfileItem = ({
       <img src={avatar} alt="" className="round-img" />
       <div>
         <h2>{name}</h2>
-        <p className="lead">{driver && <i className="fas fa-car"> Driver</i>}</p>
+        <p className="lead">
+          {driver && <i className="fas fa-car"> Driver</i>}
+        </p>
         <p>{type}</p>
         <p className="my-1">{grade !== '0' && <span>{grade}</span>}</p>
-        
+        <p className="my-1">{exp !== '0' && <span>{exp}</span>}</p>
+
         <Link to={`/profile/${_id}`} className="btn btn-primary">
           View Profile
         </Link>
@@ -35,4 +39,4 @@ const ProfileItem = ({
   );
 };
 
-export default (ProfileItem);
+export default ProfileItem;

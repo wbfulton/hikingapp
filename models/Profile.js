@@ -16,15 +16,19 @@ const ProfileSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  exp: {
+    type: String,
+    required: true
+  },
   skills: {
     type: [String],
     required: true
   },
-  resort: {
+  hike: {
     type: String
   },
-  pass: {
-    type: String
+  passes: {
+    type: [String]
   },
   bio: {
     type: String

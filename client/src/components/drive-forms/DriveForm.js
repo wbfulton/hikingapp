@@ -11,12 +11,12 @@ const DriveForm = ({ addDrive }) => {
   const [formData, setFormData] = useState({
     leavingDate: '',
     leavingTime: '',
-    resort: '',
+    hike: '',
     seats: '',
     description: ''
   });
 
-  const { leavingDate, leavingTime, resort, seats, description } = formData;
+  const { leavingDate, leavingTime, hike, seats, description } = formData;
 
   // Updates state of form data each time a field changes
   const onChange = e =>
@@ -76,14 +76,14 @@ const DriveForm = ({ addDrive }) => {
                 * What time are you leaving? (e.g. 09:00 AM){' '}
               </small>
             </div>
-            {/* Resort */}
+            {/* Location */}
             <div className="form-group">
               <input
                 type="text"
-                value={resort}
+                value={hike}
                 onChange={e => onChange(e)}
-                placeholder="Resort"
-                name="resort"
+                placeholder="Hike"
+                name="hike"
                 required
               />
               <small className="form-text">* Where are you going?</small>

@@ -38,10 +38,7 @@ router.get('/me', auth, async (req, res, next) => {
 router.get('/', async (req, res) => {
   try {
     // adds name and avatar from user collection
-    const profiles = await Profile.find().populate('user', [
-      'name',
-      'avatar'
-    ]);
+    const profiles = await Profile.find().populate('user', ['name', 'avatar']);
     res.json(profiles);
   } catch (err) {
     console.error(err.message);
@@ -86,6 +83,9 @@ router.post(
       check('type', 'Type is required')
         .not()
         .isEmpty(),
+      check('exp', 'Type is required')
+        .not()
+        .isEmpty(),
       check('skills', 'Skills is required')
         .not()
         .isEmpty(),
@@ -105,9 +105,10 @@ router.post(
     const {
       grade,
       type,
+      exp,
       skills,
-      resort,
-      pass,
+      hike,
+      passes,
       bio,
       driver,
       facebook,
@@ -120,8 +121,13 @@ router.post(
     profileFields.user = req.user.id;
     if (grade) profileFields.grade = grade;
     if (type) profileFields.type = type;
-    if (resort) profileFields.resort = resort;
-    if (pass) profileFields.pass = pass;
+    if (exp) profileFields.exp = exp + ' Years Experience';
+    if (hike) profileFields.hike = hike;
+    if (passes) {
+      // maps through skills list and transforms into array
+      // while mapping it trims off whitespace
+      profileFields.passes = passes.split(',').map(pass => pass.trim());
+    }
     if (bio) profileFields.bio = bio;
     if (driver) profileFields.driver = driver;
     if (skills) {

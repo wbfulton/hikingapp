@@ -9,9 +9,10 @@ const CreateProfile = ({ createProfile, history }) => {
   const [formData, setFormData] = useState({
     grade: '',
     type: '',
+    exp: '',
     skills: '',
-    resort: '',
-    pass: '',
+    hike: '',
+    passes: '',
     bio: '',
     driver: '',
     facebook: '',
@@ -25,9 +26,10 @@ const CreateProfile = ({ createProfile, history }) => {
   const {
     grade,
     type,
+    exp,
     skills,
-    resort,
-    pass,
+    hike,
+    passes,
     bio,
     driver,
     facebook,
@@ -73,16 +75,31 @@ const CreateProfile = ({ createProfile, history }) => {
             Give us an idea of where you are at UW
           </small>
         </div>
-        {/* Skier Type Selector */}
+        {/* Hiker Type Selector */}
         <div className="form-group">
           <select name="type" value={type} onChange={e => onChange(e)}>
             <option value="0">* Select Type</option>
-            <option value="Skier">Skier</option>
-            <option value="Snowboarder">Snowboarder</option>
-            <option value="Skier and Snowboarder">Skier and Snowboarder</option>
+            <option value="Hiker">Hiker</option>
+            <option value="Backpacker">Backpacker</option>
+            <option value="Hiker and Backpacker">Hiker and Backpacker</option>
           </select>
           <small className="form-text">
-            * Let us know how you shred the mountain
+            * Let us know how you enjoy the outdoors
+          </small>
+        </div>
+        {/* Exp Selector */}
+        <div className="form-group">
+          <input
+            type="number"
+            placeholder="Years Experience"
+            name="exp"
+            value={exp}
+            onChange={e => onChange(e)}
+            min="0"
+            required
+          />
+          <small className="form-text">
+            * How many years of hiking experience do you have?
           </small>
         </div>
         {/* Driver Selector */}
@@ -94,33 +111,33 @@ const CreateProfile = ({ createProfile, history }) => {
               <option value={false}>No</option>
             </select>
             <small className="form-text">
-              * Let us know if you can haul ski bums
+              * Let us know if you can haul members
             </small>
           </div>
         </div>
-        {/* Resort Input */}
+        {/* Hike Input */}
         <div className="form-group">
           <input
             type="text"
-            placeholder="Resort"
-            name="resort"
-            value={resort}
+            placeholder="Hike"
+            name="hike"
+            value={hike}
             onChange={e => onChange(e)}
           />
-          <small className="form-text">What is your favorite resort?</small>
+          <small className="form-text">What is your favorite hike?</small>
         </div>
-        {/* Ski Pass Input */}
+        {/* Outdoor Pass Input */}
         <div className="form-group">
           <input
             type="text"
-            placeholder="Ski Pass"
-            name="pass"
-            value={pass}
+            placeholder="Outdoor Passes"
+            name="passes"
+            value={passes}
             onChange={e => onChange(e)}
           />
           <small className="form-text">
-            What ski pass do you have? (Type 'No Ski Pass' if you do not have
-            one)
+            What outdoor passes do you have? Please enter comma seperated values
+            (e.g. Discovery, Fishing ) Leave empty if you dont have any
           </small>
         </div>
         {/* Skills */}
@@ -133,8 +150,8 @@ const CreateProfile = ({ createProfile, history }) => {
             onChange={e => onChange(e)}
           />
           <small className="form-text">
-            * Please use comma separated values (eg. Trees, Cliff Jumping,
-            Sendin' It )
+            * Please use comma separated values (eg. Bouldering, Camping,
+            Wayfinding )
           </small>
         </div>
         {/* Bio */}

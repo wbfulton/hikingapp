@@ -5,8 +5,8 @@ const ProfileAbout = ({
   profile: {
     bio,
     skills,
-    resort,
-    pass,
+    hike,
+    passes,
     user: { name }
   }
 }) => (
@@ -23,29 +23,31 @@ const ProfileAbout = ({
     <h2 className="text-primary">Skill Set</h2>
     <div className="skills">
       {skills.map((skill, index) => (
-        <div key="index" className="p-1">
+        <div key={index} className="p-1">
           <i className="fa fa-check"></i> {skill}
         </div>
       ))}
     </div>
-    {/* Resort */}
-    {resort && (
+    {/* Hike */}
+    {hike && (
       <Fragment>
         <div className="line"></div>
-        <h2 className="text-primary">Favorite Resort</h2>
+        <h2 className="text-primary">Favorite Hike</h2>
         <div className="p-1">
-          <i className="fas fa-mountain"></i> {resort}
+          <i className="fas fa-mountain"></i> {hike}
         </div>
       </Fragment>
     )}
-    {/* Ski Pass */}
-    {pass && (
+    {/* Outdoor Pass */}
+    {passes && (
       <Fragment>
         <div className="line"></div>
-        <h2 className="text-primary">Ski Pass</h2>
-        <div className="p-1">
-          <i className="far fa-address-card"></i> {pass}
-        </div>
+        <h2 className="text-primary">Outdoor Pass('s)</h2>
+        {passes.map((pass, index) => (
+          <div key={index} className="p-1">
+            <i className="far fa-address-card"></i> {pass}
+          </div>
+        ))}
       </Fragment>
     )}
   </div>

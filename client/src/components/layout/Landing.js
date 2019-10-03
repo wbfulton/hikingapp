@@ -10,12 +10,17 @@ const Landing = ({ isAuthenticated }) => {
   }
 
   return (
-    <section className="landing"> {/* Puts image on page */}
-      <div className="dark-overlay"> {/* Puts shadow over page */}
+    <section className="landing">
+      {' '}
+      {/* Puts image on page */}
+      <div className="dark-overlay">
+        {' '}
+        {/* Puts shadow over page */}
         <div className="landing-inner">
-          <h1 className="x-large">UW Rideshare</h1>
+          <h1 className="x-large">UW Hiking Club</h1>
           <p className="lead">
-            Unlimited rides to the mountain. Far out trips across the Pacific Northwest. Join the community.
+            Unlimited rides to the outdoors. Far out trips across the Pacific
+            Northwest. Join the community.
           </p>
           <div className="buttons">
             <Link to="/register" className="btn btn-primary">
