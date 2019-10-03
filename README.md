@@ -1,4 +1,4 @@
-# hikingapp
+# UW Hiking Rideshare App
 > Web app for ride shares and posts. Developed for UW Hiking Club
 > Small social network app built with the MERN stack
 
